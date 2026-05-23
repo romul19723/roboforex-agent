@@ -417,18 +417,76 @@ footer{padding:40px 5%;border-top:1px solid var(--border);display:flex;justify-c
 
   <div class="video-wrap">
     <div class="video-screen">
-      <div style="position:relative;width:100%;padding-bottom:56.25%;background:#000">
-        <iframe
-          src="https://www.youtube.com/embed/Mb08qmtvrjg?rel=0&modestbranding=1&color=white"
-          style="position:absolute;inset:0;width:100%;height:100%;border:none"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-          title="RoboForex партнёрская программа">
-        </iframe>
+      <div style="background:#060B14;position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column">
+        <!-- Slides -->
+        <div style="flex:1;position:relative;overflow:hidden" id="slideWrap">
+
+          <div class="vslide active" id="vs0" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;transition:all .6s ease;opacity:1;transform:translateX(0)">
+            <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:3px;margin-bottom:16px">ШАГ 01 / 04</div>
+            <div style="font-size:56px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(0,212,255,.4))">🚀</div>
+            <div style="font-family:var(--font-head);font-size:clamp(22px,4vw,34px);font-weight:800;margin-bottom:14px;line-height:1.1">Регистрируйся <span style="background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">бесплатно</span></div>
+            <div style="font-size:14px;color:var(--muted);max-width:460px;line-height:1.7">Заходи по реферальной ссылке, заполняй форму — и сразу получаешь личный кабинет партнёра с твоей уникальной ссылкой</div>
+            <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center">
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$0</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Стоимость входа</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">2 мин</div><div style="font-size:11px;color:var(--muted);margin-top:3px">На регистрацию</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">24/7</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Поддержка</div></div>
+            </div>
+          </div>
+
+          <div class="vslide" id="vs1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;transition:all .6s ease;opacity:0;transform:translateX(60px)">
+            <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:3px;margin-bottom:16px">ШАГ 02 / 04</div>
+            <div style="font-size:56px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(0,212,255,.4))">🤖</div>
+            <div style="font-family:var(--font-head);font-size:clamp(22px,4vw,34px);font-weight:800;margin-bottom:14px;line-height:1.1">AI-агент работает <span style="background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">вместо тебя</span></div>
+            <div style="font-size:14px;color:var(--muted);max-width:460px;line-height:1.7">Делишься ссылкой на лендинг — AI сам встречает, прогревает и ведёт каждого новичка к регистрации. Ты только знакомишься голосом</div>
+            <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center">
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">7</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Шагов воронки</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">24/7</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Без твоего участия</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">∞</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Диалогов сразу</div></div>
+            </div>
+          </div>
+
+          <div class="vslide" id="vs2" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;transition:all .6s ease;opacity:0;transform:translateX(60px)">
+            <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:3px;margin-bottom:16px">ШАГ 03 / 04</div>
+            <div style="font-size:56px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(255,184,0,.4))">💰</div>
+            <div style="font-family:var(--font-head);font-size:clamp(22px,4vw,34px);font-weight:800;margin-bottom:14px;line-height:1.1">Клиент торгует — <span style="background:linear-gradient(90deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">ты получаешь %</span></div>
+            <div style="font-size:14px;color:var(--muted);max-width:460px;line-height:1.7">Каждый раз когда привлечённый клиент открывает сделку — RoboForex автоматически начисляет тебе до 84% своей комиссии. Пожизненно</div>
+            <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center">
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">84%</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Макс. комиссия</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">2×</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Выплаты в месяц</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">$10</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Мин. вывод</div></div>
+            </div>
+          </div>
+
+          <div class="vslide" id="vs3" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;transition:all .6s ease;opacity:0;transform:translateX(60px)">
+            <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:3px;margin-bottom:16px">ШАГ 04 / 04</div>
+            <div style="font-size:56px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(0,229,160,.4))">🌐</div>
+            <div style="font-family:var(--font-head);font-size:clamp(22px,4vw,34px);font-weight:800;margin-bottom:14px;line-height:1.1">Команда растёт — <span style="background:linear-gradient(90deg,var(--success),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">доход множится</span></div>
+            <div style="font-size:14px;color:var(--muted);max-width:460px;line-height:1.7">Партнёры приводят своих партнёров — ты зарабатываешь с 5 уровней вглубь. Сеть работает автоматически пока ты занимаешься жизнью</div>
+            <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;justify-content:center">
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--success),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">5</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Уровней сети</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--success),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">3.5M</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Клиентов в мире</div></div>
+              <div style="text-align:center"><div style="font-family:var(--font-head);font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--success),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">169</div><div style="font-size:11px;color:var(--muted);margin-top:3px">Стран</div></div>
+            </div>
+          </div>
+
+          <!-- Progress bar -->
+          <div style="position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .1s linear" id="vProgressBar"></div>
+        </div>
+
+        <!-- Controls -->
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px;border-top:1px solid var(--border);background:rgba(0,0,0,.3)">
+          <button onclick="vPrev()" style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;transition:.2s;display:flex;align-items:center;justify-content:center">‹</button>
+          <div id="vDots" style="display:flex;gap:8px">
+            <div class="vdot active" onclick="vGo(0)" style="width:10px;height:10px;border-radius:50%;background:var(--accent);cursor:pointer;transition:.3s;box-shadow:0 0 8px rgba(0,212,255,.5)"></div>
+            <div class="vdot" onclick="vGo(1)" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:.3s"></div>
+            <div class="vdot" onclick="vGo(2)" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:.3s"></div>
+            <div class="vdot" onclick="vGo(3)" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:.3s"></div>
+          </div>
+          <button onclick="vNext()" style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;transition:.2s;display:flex;align-items:center;justify-content:center">›</button>
+        </div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--muted)">Посмотри видео — займёт 5 минут. После него всё станет понятно 👆</p>
+    <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--muted)">4 шага от регистрации до первых комиссий 👆</p>
   </div>
 </section>
 
@@ -701,6 +759,54 @@ setTimeout(() => {
 }, 500);
 
 // ─── SLIDE ANIMATION ───
+let vCurrent = 0;
+const vTotal = 4;
+let vProgress = 0;
+let vTimer = null;
+
+function vGo(idx) {
+  const slides = document.querySelectorAll('.vslide');
+  const dots = document.querySelectorAll('.vdot');
+  slides[vCurrent].style.opacity = '0';
+  slides[vCurrent].style.transform = 'translateX(-60px)';
+  vCurrent = idx;
+  slides[vCurrent].style.transform = 'translateX(60px)';
+  setTimeout(() => {
+    slides[vCurrent].style.opacity = '1';
+    slides[vCurrent].style.transform = 'translateX(0)';
+  }, 50);
+  dots.forEach((d,i) => {
+    d.style.background = i === vCurrent ? 'var(--accent)' : 'rgba(255,255,255,.15)';
+    d.style.boxShadow = i === vCurrent ? '0 0 8px rgba(0,212,255,.5)' : 'none';
+  });
+  vResetProgress();
+}
+
+function vNext() { vGo((vCurrent + 1) % vTotal); }
+function vPrev() { vGo((vCurrent - 1 + vTotal) % vTotal); }
+
+function vResetProgress() {
+  clearInterval(vTimer);
+  vProgress = 0;
+  const bar = document.getElementById('vProgressBar');
+  if (!bar) return;
+  bar.style.width = '0%';
+  vTimer = setInterval(() => {
+    vProgress += 100/50;
+    bar.style.width = Math.min(vProgress,100) + '%';
+    if (vProgress >= 100) vNext();
+  }, 100);
+}
+
+// Auto-start when visible
+const vObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) vResetProgress();
+    else clearInterval(vTimer);
+  });
+}, { threshold: 0.3 });
+const vWrap = document.getElementById('slideWrap');
+if (vWrap) vObs.observe(vWrap);
 let currentSlide = 0;
 const totalSlides = 4;
 let slideTimer = null;
