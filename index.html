@@ -396,13 +396,15 @@ footer{padding:40px 5%;border-top:1px solid var(--border);display:flex;justify-c
         <div class="bot-ava">🤖</div>
         <div>
           <div class="bot-name">RoboForex AI Агент</div>
-          <div class="bot-status">● онлайн</div>
+          <div class="bot-status" id="botStatus">● онлайн • Gemini AI</div>
         </div>
       </div>
-      <div class="chat-body" id="chatBody">
-        <div class="msg bot" id="msg1"></div>
+      <div class="chat-body" id="chatBody"></div>
+      <div class="chat-btns" id="chatBtns" style="flex-wrap:wrap;gap:6px;padding:8px 12px"></div>
+      <div style="display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border);background:var(--surface)">
+        <input type="text" id="userInput" placeholder="Напишите вопрос..." style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none" onkeydown="if(event.key==='Enter')sendMsg()">
+        <button onclick="sendMsg()" style="background:linear-gradient(135deg,var(--accent),#0099cc);border:none;border-radius:8px;padding:10px 16px;color:#000;font-weight:700;cursor:pointer;font-size:16px;transition:.2s" title="Отправить">➤</button>
       </div>
-      <div class="chat-btns" id="chatBtns"></div>
     </div>
   </div>
 </section>
@@ -550,150 +552,152 @@ function calc() {
 }
 calc();
 
-// ─── CHAT BOT ───
-const flow = [
-  {
-    bot: '👋 Привет! Я AI-агент RoboForex.\n\nПомогу разобраться как зарабатывать на партнёрской программе одного из крупнейших форекс-брокеров мира.\n\nС чего начнём?',
-    btns: [
-      { text: '💰 Хочу зарабатывать на рефералах', next: 1 },
-      { text: '📈 Интересует трейдинг', next: 7 },
-    ]
-  },
-  {
-    bot: '💼 Отлично! RoboForex платит партнёрам до 84% от своей комиссии.\n\nЭто значит: каждый раз когда твой клиент открывает сделку — ты получаешь деньги. Автоматически.\n\nУ тебя уже есть опыт в партнёрских программах?',
-    btns: [
-      { text: '✅ Да, пробовал', next: 2 },
-      { text: '🔰 Нет, я новичок', next: 3 },
-    ]
-  },
-  {
-    bot: '🎯 Отлично, ты уже понимаешь механику.\n\nЧем RoboForex лучше других:\n\n✅ До 84% от спреда (рынок в среднем 30–50%)\n✅ 5-уровневая сеть — зарабатываешь с команды\n✅ Выплаты 2 раза в месяц\n✅ Работает с 2009 года\n\nГотов зарегистрироваться?',
-    btns: [
-      { text: '🚀 Да, регистрируюсь!', next: 6 },
-      { text: '❓ Ещё вопросы', next: 4 },
-    ]
-  },
-  {
-    bot: '🤝 Не беспокойся — здесь всё просто.\n\nКак это работает для новичка:\n\n1️⃣ Регистрируешься бесплатно\n2️⃣ Получаешь личную реф. ссылку\n3️⃣ Делишься ею с людьми\n4️⃣ Когда они торгуют — ты получаешь %\n\nНикаких знаний трейдинга не нужно — только рекомендовать.',
-    btns: [
-      { text: '💡 Понятно! Как зарегистрироваться?', next: 6 },
-      { text: '🤔 Сколько реально можно заработать?', next: 5 },
-    ]
-  },
-  {
-    bot: '📊 Реалистичные цифры:\n\n💰 10 клиентов × $500 депозит = ~$125/мес\n💰 50 клиентов = ~$625/мес\n💰 С командой из партнёров — неограниченно\n\nГлавное — система работает 24/7 без твоего участия. Один раз привлёк → получаешь пожизненно.',
-    btns: [
-      { text: '🚀 Хочу начать прямо сейчас!', next: 6 },
-    ]
-  },
-  {
-    bot: '❓ Задавай — отвечу на всё!\n\nЧто тебя беспокоит?',
-    btns: [
-      { text: '🔒 Это надёжно?', next: 8 },
-      { text: '💸 Нужны ли вложения?', next: 9 },
-      { text: '🚀 Готов регистрироваться', next: 6 },
-    ]
-  },
-  {
-    bot: '🎉 Отлично! Нажми кнопку ниже — мой AI-помощник в Telegram проведёт тебя по всем шагам регистрации и ответит на любые вопросы 🤖\n\nПосле регистрации получишь личный кабинет партнёра и собственную реф. ссылку.\n\nДо встречи в Telegram! 🤝',
-    btns: [
-      { text: '🤖 Открыть AI-бота в Telegram →', next: 10, link: 'https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5' },
-    ]
-  },
-  {
-    bot: '📈 Для трейдеров RoboForex предлагает:\n\n⚡ Счета Pro, ECN, Prime — спреды от 0 пп\n🤖 Поддержка MT4/MT5 и торговых роботов\n📊 12 000+ инструментов\n💹 CopyFX — копируй сделки профи\n\nПлюс — можешь одновременно торговать сам и зарабатывать на рефералах.',
-    btns: [
-      { text: '🚀 Открыть AI-бота →', next: 6, link: 'https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5' },
-      { text: '💰 Расскажи про партнёрку', next: 1 },
-    ]
-  },
-  {
-    bot: '🔐 RoboForex — один из самых надёжных брокеров:\n\n✅ Лицензия FSC Белиза\n✅ Член Financial Commission кат. A\n✅ Компенсационный фонд $20 000\n✅ Работает с 2009 года\n✅ 3.5 млн клиентов в 169 странах\n✅ Клиентские средства на сегрегированных счетах',
-    btns: [
-      { text: '💸 А вложения нужны?', next: 9 },
-      { text: '🚀 Регистрируюсь!', next: 6 },
-    ]
-  },
-  {
-    bot: '💸 Нет! Регистрация в партнёрской программе абсолютно бесплатна.\n\nТы не вкладываешь ни рубля. Просто приводишь клиентов — они торгуют — ты зарабатываешь % от брокера.\n\nДля самой торговли минимальный депозит — от $10 (счёт ProCent).',
-    btns: [
-      { text: '🚀 Отлично, регистрируюсь!', next: 6 },
-    ]
-  },
-  {
-    bot: '✅ Отлично! AI-бот в Telegram уже ждёт тебя — он проведёт по всем шагам и ответит на любые вопросы 24/7. Удачи! 🚀',
-    btns: [
-      { text: '🤖 Перейти в Telegram →', next: 10, link: 'https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5' },
-    ]
-  }
-];
+// ─── GEMINI AI CHAT ───
+const GEMINI_API_KEY = 'AIzaSyB-_Fw8CF8sIwA7tDYSBsr3PqIRum75vcc';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-let state = 0;
-let typing = false;
+const SYSTEM_PROMPT = `Ты AI-агент партнёрской программы брокера RoboForex. Твоя задача — помочь новичку разобраться и привести к регистрации.
 
-function renderMsg(text, type) {
+ФАКТЫ О ROBOFOREX:
+- Работает с 2009 года, 3.5 млн клиентов в 169 странах
+- Лицензия FSC, член Financial Commission категории A
+- Партнёры получают до 84% от комиссии брокера
+- 5-уровневая реферальная сеть
+- Выплаты 2 раза в месяц, минимум $10
+- Бесплатная регистрация, минимальный депозит от $10
+- Инструменты: MT4, MT5, 12000+ активов, CopyFX
+
+ССЫЛКА ДЛЯ РЕГИСТРАЦИИ: https://rbfxdirect.com/ru/lk/?a=rgtfy
+TELEGRAM БОТ: https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5
+
+ПРАВИЛА:
+- Отвечай по-русски, дружелюбно, коротко (2-4 предложения)
+- Используй эмодзи
+- При вопросе о регистрации давай ссылку rbfxdirect.com/ru/lk/?a=rgtfy
+- В конце задавай один вопрос для продолжения диалога
+- Если хотят живого человека — отправляй в Telegram бот`;
+
+let chatHistory = [];
+let isTyping = false;
+
+function scrollChat() {
+  const cb = document.getElementById('chatBody');
+  if(cb) cb.scrollTop = cb.scrollHeight;
+}
+
+function addMsg(text, type) {
+  const cb = document.getElementById('chatBody');
   const el = document.createElement('div');
   el.className = 'msg ' + type;
   el.style.whiteSpace = 'pre-wrap';
   el.textContent = text;
-  return el;
-}
-
-function showTyping() {
-  const el = document.createElement('div');
-  el.className = 'msg bot';
-  el.id = 'typing-indicator';
-  el.innerHTML = '<span class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
-  document.getElementById('chatBody').appendChild(el);
+  cb.appendChild(el);
   scrollChat();
 }
 
-function removeTyping() {
-  const t = document.getElementById('typing-indicator');
+function showTypingIndicator() {
+  const cb = document.getElementById('chatBody');
+  const el = document.createElement('div');
+  el.className = 'msg bot';
+  el.id = 'typing-ind';
+  el.innerHTML = '<span class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+  cb.appendChild(el);
+  scrollChat();
+}
+
+function removeTypingIndicator() {
+  const t = document.getElementById('typing-ind');
   if (t) t.remove();
 }
 
-function scrollChat() {
-  const cb = document.getElementById('chatBody');
-  cb.scrollTop = cb.scrollHeight;
+function showQuickBtns() {
+  const btnsEl = document.getElementById('chatBtns');
+  const btns = [
+    { text: '💰 Как заработать?', msg: 'Как я могу заработать на партнёрской программе?' },
+    { text: '🔒 Это надёжно?', msg: 'Насколько надёжен RoboForex?' },
+    { text: '🚀 Как начать?', msg: 'Как зарегистрироваться и начать?' },
+    { text: '💸 Нужны вложения?', msg: 'Нужно ли вкладывать деньги для старта?' },
+  ];
+  btnsEl.innerHTML = '';
+  btns.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'cbtn';
+    btn.textContent = b.text;
+    btn.onclick = () => {
+      document.getElementById('userInput').value = b.msg;
+      sendMsg();
+      btnsEl.innerHTML = '';
+    };
+    btnsEl.appendChild(btn);
+  });
 }
 
-function goStep(idx, userText) {
-  if (typing) return;
-  typing = true;
-  const cb = document.getElementById('chatBody');
+function showTgBtn() {
   const btnsEl = document.getElementById('chatBtns');
+  const btn = document.createElement('button');
+  btn.className = 'cbtn active';
+  btn.textContent = '🤖 Открыть Telegram бота →';
+  btn.onclick = () => window.open('https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5', '_blank');
+  btnsEl.appendChild(btn);
+}
 
-  if (userText) {
-    cb.appendChild(renderMsg(userText, 'user'));
-    scrollChat();
+async function sendMsg() {
+  if (isTyping) return;
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, 'user');
+  input.value = '';
+  document.getElementById('chatBtns').innerHTML = '';
+  isTyping = true;
+  showTypingIndicator();
+  chatHistory.push({ role: 'user', parts: [{ text }] });
+
+  if (GEMINI_API_KEY === 'ВСТАВЬ_СВОЙ_КЛЮЧ_СЮДА') {
+    await new Promise(r => setTimeout(r, 800));
+    removeTypingIndicator();
+    addMsg('⚠️ Gemini API ключ не вставлен. Пока переходи в Telegram-бот — он ответит на все вопросы! 👇', 'bot');
+    showTgBtn();
+    isTyping = false;
+    return;
   }
 
-  btnsEl.innerHTML = '';
-  showTyping();
-
-  setTimeout(() => {
-    removeTyping();
-    const step = flow[idx];
-    const msg = renderMsg(step.bot, 'bot');
-    cb.appendChild(msg);
-    scrollChat();
-
-    step.btns.forEach(b => {
-      const btn = document.createElement('button');
-      btn.className = 'cbtn';
-      btn.textContent = b.text;
-      btn.onclick = () => {
-        if (b.link) window.open(b.link, '_blank');
-        goStep(b.next, b.text);
-      };
-      btnsEl.appendChild(btn);
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: chatHistory,
+        generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
+      })
     });
-
-    typing = false;
-    scrollChat();
-  }, 1200);
+    const data = await res.json();
+    removeTypingIndicator();
+    if (data.candidates?.[0]) {
+      const reply = data.candidates[0].content.parts[0].text;
+      chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+      addMsg(reply, 'bot');
+      if (reply.includes('регистр') || reply.includes('rbfxdirect') || reply.includes('Telegram')) {
+        showTgBtn();
+      }
+    } else {
+      addMsg('Что-то пошло не так. Попробуй ещё раз! 🙏', 'bot');
+    }
+  } catch(e) {
+    removeTypingIndicator();
+    addMsg('Нет соединения. Переходи в Telegram-бот 👇', 'bot');
+    showTgBtn();
+  }
+  isTyping = false;
 }
+
+// Init
+setTimeout(() => {
+  addMsg('👋 Привет! Я AI-агент RoboForex.\n\nОтвечу на любой вопрос о партнёрской программе — напиши или выбери тему 👇', 'bot');
+  showQuickBtns();
+}, 500);
 
 // ─── SLIDE ANIMATION ───
 let currentSlide = 0;
