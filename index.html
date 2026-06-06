@@ -470,13 +470,28 @@ function showQuickBtns() {
 }
 
 function showRegBtn() {
-  // Check if already added
-  if (chatBtns.querySelector('.active')) return;
-  const btn = document.createElement('button');
-  btn.className = 'cbtn active';
-  btn.textContent = '🚀 Зарегистрироваться →';
-  btn.onclick = () => window.open(REG_URL, '_blank');
-  chatBtns.appendChild(btn);
+  chatBtns.innerHTML = '';
+  // Reg button
+  const regBtn = document.createElement('button');
+  regBtn.className = 'cbtn active';
+  regBtn.textContent = '🚀 Зарегистрироваться →';
+  regBtn.onclick = () => window.open(REG_URL, '_blank');
+  chatBtns.appendChild(regBtn);
+  // Quick buttons below
+  const followups = [
+    { text: '💰 Сколько можно заработать?', msg: 'Сколько реально можно заработать?' },
+    { text: '❓ Ещё вопрос', msg: '' },
+  ];
+  followups.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'cbtn';
+    btn.textContent = b.text;
+    btn.onclick = () => {
+      if (b.msg) { userInput.value = b.msg; sendMsg(); }
+      else { userInput.focus(); }
+    };
+    chatBtns.appendChild(btn);
+  });
 }
 
 function setOnline(online) {
@@ -523,13 +538,33 @@ async function sendMsg() {
       history.push({ role: 'assistant', content: reply });
       addMsg(reply, 'bot');
 
-      // Show reg button if relevant
+      // Always show follow-up buttons after every reply
+      chatBtns.innerHTML = '';
       const lc = reply.toLowerCase() + text.toLowerCase();
       if (lc.includes('регистр') || lc.includes('начать') || lc.includes('ссылк') || lc.includes('rbfxdirect')) {
-        showRegBtn();
-      } else {
-        showQuickBtns();
+        // Show reg button first
+        const regBtn = document.createElement('button');
+        regBtn.className = 'cbtn active';
+        regBtn.textContent = '🚀 Зарегистрироваться →';
+        regBtn.onclick = () => window.open(REG_URL, '_blank');
+        chatBtns.appendChild(regBtn);
       }
+      // Always show these follow-up questions
+      const nextQs = [
+        { text: '💰 Сколько можно заработать?', msg: 'Сколько реально можно заработать в месяц?' },
+        { text: '🔒 Это надёжно?', msg: 'Насколько это надёжно и безопасно?' },
+        { text: '🚀 Как начать с нуля?', msg: 'Как начать с нуля, без опыта?' },
+        { text: '💸 Нужны вложения?', msg: 'Нужно ли вкладывать свои деньги?' },
+      ];
+      nextQs.forEach(q => {
+        const btn = document.createElement('button');
+        btn.className = 'cbtn';
+        btn.textContent = q.text;
+        btn.onclick = () => { userInput.value = q.msg; sendMsg(); };
+        chatBtns.appendChild(btn);
+      });
+      // Auto-focus input
+      userInput.focus();
     } else if (data.error) {
       // API error
       const errMsg = data.error.message || 'Ошибка API';
@@ -552,6 +587,8 @@ async function sendMsg() {
 
   typing = false;
   sendBtn.disabled = false;
+  // Always focus input ready for next question
+  setTimeout(() => userInput.focus(), 100);
 }
 
 // Init chat
