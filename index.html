@@ -855,6 +855,277 @@
     border-radius: 999px;
   }
 
+  /* === CopyFX section === */
+  .copyfx-section {
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(34, 211, 238, 0.06) 0%, transparent 50%);
+  }
+
+  .copyfx-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .copyfx-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  .copyfx-features { display: flex; flex-direction: column; gap: 24px; }
+
+  .copyfx-feat {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .copyfx-feat-icon {
+    width: 44px; height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius-sm);
+    display: grid; place-items: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .copyfx-feat h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .copyfx-feat p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .copyfx-compare {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .copyfx-compare::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #EC4899);
+  }
+
+  .copyfx-compare-head {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+  }
+
+  .copyfx-row {
+    margin-bottom: 24px;
+  }
+
+  .copyfx-row-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .copyfx-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .copyfx-bar {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13.5px;
+    border-left: 3px solid var(--border-bright);
+    position: relative;
+  }
+
+  .copyfx-bar-label {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .copyfx-bar-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+
+  .copyfx-bar.hi {
+    border-left-color: #EC4899;
+    background: linear-gradient(90deg, rgba(236, 72, 153, 0.12), var(--surface) 60%);
+  }
+
+  .copyfx-bar.hi .copyfx-bar-value {
+    color: #F9A8D4;
+  }
+
+  .copyfx-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .copyfx-footer b {
+    color: #F9A8D4;
+    font-weight: 700;
+  }
+
+  /* === Passive income (3 roles) === */
+  .passive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .passive-grid { grid-template-columns: 1fr; }
+  }
+
+  .passive-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .passive-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-bright);
+  }
+
+  .passive-card.highlight {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(34, 211, 238, 0.07), var(--bg-elevated) 60%);
+  }
+
+  .passive-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--accent);
+    color: #06080F;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .passive-icon {
+    width: 56px; height: 56px;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 28px;
+    margin-bottom: 18px;
+  }
+
+  .passive-role {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .passive-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .passive-stat {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .passive-stat:last-child { margin-bottom: 0; }
+
+  .passive-stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .passive-stat-value {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .passive-stat.partner {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(34, 211, 238, 0.25);
+  }
+
+  .passive-stat.partner .passive-stat-value {
+    color: var(--accent-bright);
+    font-size: 15px;
+  }
+
+  .passive-note {
+    margin: 48px auto 0;
+    max-width: 760px;
+    padding: 28px 32px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .passive-note p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+
+  .passive-note b {
+    color: var(--text);
+    font-weight: 700;
+  }
+
   /* === AI Chat === */
   .ai-section {
     background: var(--bg-elevated);
@@ -1334,7 +1605,7 @@
       <div class="why-card">
         <div class="why-icon">🏆</div>
         <h3>Лицензия FSC</h3>
-        <p>Международная лицензия, член Financial Commission категории A с компенсационным фондом $20 000.</p>
+        <p>Лицензия FSC Belize, член Financial Commission категории A с компенсационным фондом €20 000 на каждый клиентский случай.</p>
         <span class="why-tag">Надёжность</span>
       </div>
       <div class="why-card">
@@ -1423,7 +1694,7 @@
         </div>
       </div>
 
-      <div class="calc-note">Расчёт ориентировочный, основан на средней торговой активности клиентов RoboForex.</div>
+      <div class="calc-note">Расчёт ориентировочный, основан на средней торговой активности. С CopyFX-клиентами (копитрейдинг) доход выше в 3–5 раз — смотри секцию ниже.</div>
     </div>
   </div>
 </section>
@@ -1519,6 +1790,163 @@
   </div>
 </section>
 
+<!-- COPYFX (additional income) -->
+<section class="copyfx-section" id="copyfx">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">+ Второй источник дохода</div>
+      <h2>Копитрейдинг удваивает заработок</h2>
+      <p>Клиенты на CopyFX торгуют в 3–5 раз активнее обычных. Больше сделок — больше твоей комиссии. Без дополнительных усилий.</p>
+    </div>
+
+    <div class="copyfx-grid">
+      <div class="copyfx-features">
+        <div class="copyfx-feat">
+          <span class="copyfx-feat-icon">🔄</span>
+          <div>
+            <h3>Клиенты копируют топ-трейдеров</h3>
+            <p>CopyFX — рейтинг лучших трейдеров RoboForex. Твой клиент подписывается одной кнопкой и автоматически копирует их сделки. Оборот вырастает в разы.</p>
+          </div>
+        </div>
+        <div class="copyfx-feat">
+          <span class="copyfx-feat-icon">📈</span>
+          <div>
+            <h3>Trader-провайдеры тоже клиенты</h3>
+            <p>Привлёк успешного трейдера в CopyFX — он сам создаёт огромный объём, а под него подключаются инвесторы. Двойной поток с одного партнёра.</p>
+          </div>
+        </div>
+        <div class="copyfx-feat">
+          <span class="copyfx-feat-icon">⚡</span>
+          <div>
+            <h3>Работает без твоего участия</h3>
+            <p>CopyFX встроен в RoboForex. Никаких отдельных продуктов или инструкций. Клиент подключается за минуту — ты получаешь повышенную комиссию автоматически.</p>
+          </div>
+        </div>
+        <div class="copyfx-feat">
+          <span class="copyfx-feat-icon">💎</span>
+          <div>
+            <h3>Та же ставка — до 84%</h3>
+            <p>Доход с CopyFX-клиентов считается по той же шкале. Affiliate-партнёры получают до 84% от комиссии брокера. Просто комиссии становится больше.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyfx-compare">
+        <div class="copyfx-compare-head">Обычный клиент vs CopyFX</div>
+
+        <div class="copyfx-row">
+          <div class="copyfx-row-label">Сделок в месяц</div>
+          <div class="copyfx-bars">
+            <div class="copyfx-bar">
+              <span class="copyfx-bar-label">Обычный</span>
+              <span class="copyfx-bar-value">15–30</span>
+            </div>
+            <div class="copyfx-bar hi">
+              <span class="copyfx-bar-label">CopyFX</span>
+              <span class="copyfx-bar-value">80–150</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyfx-row">
+          <div class="copyfx-row-label">Твоя комиссия в месяц</div>
+          <div class="copyfx-bars">
+            <div class="copyfx-bar">
+              <span class="copyfx-bar-label">Обычный</span>
+              <span class="copyfx-bar-value">$15–30</span>
+            </div>
+            <div class="copyfx-bar hi">
+              <span class="copyfx-bar-label">CopyFX</span>
+              <span class="copyfx-bar-value">$80–150</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyfx-row">
+          <div class="copyfx-row-label">Активность клиента</div>
+          <div class="copyfx-bars">
+            <div class="copyfx-bar">
+              <span class="copyfx-bar-label">Обычный</span>
+              <span class="copyfx-bar-value">эпизодическая</span>
+            </div>
+            <div class="copyfx-bar hi">
+              <span class="copyfx-bar-label">CopyFX</span>
+              <span class="copyfx-bar-value">постоянная</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyfx-footer">
+          В среднем CopyFX-клиент приносит партнёру <b>в 3–5 раз больше</b>, чем обычный
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASSIVE INCOME — 3 roles -->
+<section id="passive">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Пассивный доход</div>
+      <h2>3 роли в CopyFX — 3 потока пассива</h2>
+      <p>В копитрейдинге каждый зарабатывает по-своему. Клиенту легче решиться, когда видно, что и без активной торговли есть деньги. А ты получаешь свою долю с любой роли.</p>
+    </div>
+
+    <div class="passive-grid">
+
+      <div class="passive-card">
+        <div class="passive-icon">👤</div>
+        <div class="passive-role">Инвестор-копировщик</div>
+        <p class="passive-desc">Не торгует сам. Выбирает топ-трейдера из рейтинга CopyFX и подписывается одной кнопкой. Все сделки трейдера автоматически повторяются на счёте инвестора — это самый пассивный сценарий.</p>
+        <div class="passive-stat">
+          <div class="passive-stat-label">Типичный доход клиента</div>
+          <div class="passive-stat-value">$200 – $2 000/мес</div>
+        </div>
+        <div class="passive-stat partner">
+          <div class="passive-stat-label">Тебе как партнёру</div>
+          <div class="passive-stat-value">до 84% с торговых комиссий</div>
+        </div>
+      </div>
+
+      <div class="passive-card">
+        <div class="passive-icon">📊</div>
+        <div class="passive-role">Трейдер-провайдер</div>
+        <p class="passive-desc">Публикует свою стратегию в рейтинге CopyFX. Чем выше позиция — тем больше копировщиков. Получает % от прибыли каждого инвестора. Торгует один раз — копируется сотнями.</p>
+        <div class="passive-stat">
+          <div class="passive-stat-label">Типичный доход клиента</div>
+          <div class="passive-stat-value">$500 – $5 000/мес</div>
+        </div>
+        <div class="passive-stat partner">
+          <div class="passive-stat-label">Тебе как партнёру</div>
+          <div class="passive-stat-value">до 84% + комиссии с копий</div>
+        </div>
+      </div>
+
+      <div class="passive-card highlight">
+        <div class="passive-badge">Твоя роль</div>
+        <div class="passive-icon">🤝</div>
+        <div class="passive-role">Партнёр-привлекатель</div>
+        <p class="passive-desc">Не торгует и не инвестирует. AI-агент сам общается с клиентами, объясняет CopyFX и ведёт к подключению. Ты только делишься ссылкой — заработок идёт со всех активных клиентов.</p>
+        <div class="passive-stat">
+          <div class="passive-stat-label">Типичный доход партнёра</div>
+          <div class="passive-stat-value">$300 – $8 400/мес</div>
+        </div>
+        <div class="passive-stat partner">
+          <div class="passive-stat-label">Источник</div>
+          <div class="passive-stat-value">% с торговли клиентов</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="passive-note">
+      <p>Один клиент может быть сразу <b>во всех трёх ролях</b> — инвестировать в копитрейдинг, публиковать свою стратегию и приглашать новых партнёров. Каждая активность даёт тебе комиссию.</p>
+      <a href="#ai-chat" class="btn btn-primary">Спросить AI о копитрейдинге →</a>
+    </div>
+  </div>
+</section>
+
 <!-- AI CHAT (interactive) -->
 <section class="ai-section" id="ai-chat">
   <div class="container">
@@ -1553,7 +1981,12 @@
           <button class="suggest-chip" data-q="Что такое 84%?">📊 Что такое 84%?</button>
           <button class="suggest-chip" data-q="Когда выплаты?">📅 Когда выплаты?</button>
           <button class="suggest-chip" data-q="Это надёжно?">🛡️ Это надёжно?</button>
+          <button class="suggest-chip" data-q="Где зарегистрирован RoboForex?">📜 Где зарегистрирован?</button>
+          <button class="suggest-chip" data-q="Что если брокер закроется?">⚠️ Если брокер закроется?</button>
           <button class="suggest-chip" data-q="Как работают 5 уровней?">🌐 Как работают 5 уровней?</button>
+          <button class="suggest-chip" data-q="Как заработать пассивно без торговли?">💤 Пассивный доход без торговли</button>
+          <button class="suggest-chip" data-q="Что такое копитрейдинг CopyFX?">🔄 Копитрейдинг CopyFX?</button>
+          <button class="suggest-chip" data-q="Как подключить CopyFX клиенту?">💎 Как подключить CopyFX?</button>
         </div>
 
         <form class="ai-input" id="aiForm">
@@ -1821,8 +2254,28 @@
       // Knowledge base. Each entry: triggers (regex), response (string with optional {tg} placeholder).
       var KB = [
         {
+          triggers: /(пассив|без работы|не торгу|ничего не дела|сам.*зарабат|не разбира.*трейдинг)/i,
+          response: 'Пассивный доход в CopyFX — это центральная фишка. Есть 3 варианта:\n\n👤 Инвестор-копировщик — выбирает топ-трейдера и копирует его сделки автоматически. Доход: $200–$2 000/мес с депозита. Делать ничего не нужно.\n\n📊 Трейдер-провайдер — публикует стратегию в рейтинге. Получает % от прибыли каждого копировщика. Один раз торгует — копируется сотнями. $500–$5 000/мес.\n\n🤝 Партнёр-привлекатель — AI-агент сам приводит клиентов. Ты только делишься ссылкой. $300–$8 400/мес с активных клиентов.\n\nОдин человек может совмещать все 3 роли.'
+        },
+        {
+          triggers: /(инвестор|копировщик|как инвестир|подписат.*трейдер|выбрать трейдер|рейтинг)/i,
+          response: 'Стать инвестором в CopyFX — 4 минуты:\n\n1️⃣ Регистрация по партнёрской ссылке\n2️⃣ Пополнение от $10 на инвестиционный счёт\n3️⃣ Открыть раздел CopyFX → Рейтинг трейдеров\n4️⃣ Выбрать трейдера по доходности, риску, сроку работы\n5️⃣ Нажать «Копировать» и задать пропорцию\n\nДальше счёт работает сам — сделки трейдера копируются автоматически. Прибыль за вычетом его комиссии — твоя.\n\nТипичный доход: 5–15% в месяц от депозита.'
+        },
+        {
+          triggers: /(провайд|стать трейдер|своя стратеги|публиковать стратеги|стратеги.*копи)/i,
+          response: 'Стать трейдером-провайдером в CopyFX — это пассив для активных трейдеров:\n\n1️⃣ Регистрируешь Pro-счёт в RoboForex\n2️⃣ Торгуешь — система автоматически считает статистику\n3️⃣ Публикуешь оффер в рейтинге CopyFX (название, % комиссии)\n4️⃣ Инвесторы подписываются на копирование\n5️⃣ Получаешь комиссию с каждого их прибыльного периода\n\nТоп-провайдеры зарабатывают $5 000–$50 000/мес — большая часть это пассив с копировщиков, а не своя торговля.'
+        },
+        {
+          triggers: /(копитрейд|copy|копиров|copyfx|трейдер.провайд|стратеги.*копиров|инвестор.*копир)/i,
+          response: 'Копитрейдинг (CopyFX) — твой второй источник дохода. Клиенты подписываются на сделки топ-трейдеров RoboForex и копируют их автоматически.\n\nЧто это даёт партнёру:\n• CopyFX-клиент совершает 80–150 сделок в месяц вместо 15–30\n• Trader-провайдеры создают огромный объём сами\n• Та же шкала комиссий — до 84%\n• Никаких доп. усилий — это встроенная фича\n\nТипичный CopyFX-клиент приносит партнёру $80–150/мес против $15–30 с обычного. В 3–5 раз больше.'
+        },
+        {
+          triggers: /(как.*копи|подключ.*copy|как.*начать.*copy|где copyfx|copyfx.*работа)/i,
+          response: 'CopyFX работает так:\n\n1️⃣ Клиент регистрируется по твоей ссылке\n2️⃣ Открывает раздел CopyFX в личном кабинете\n3️⃣ Выбирает трейдера из рейтинга (или становится провайдером сам)\n4️⃣ Подписывается на копирование одной кнопкой\n5️⃣ Все сделки трейдера копируются автоматически\n\nТы получаешь свою комиссию с каждой скопированной сделки. AI-агент в Telegram сам объясняет CopyFX клиентам и подталкивает к подключению.'
+        },
+        {
           triggers: /(сколько|зараб|доход|выруч|получ|деньг.*месяц|приб)/i,
-          response: 'Доход складывается из трёх вещей: сколько клиентов приведёшь, какие у них депозиты и твой % комиссии (до 84%).\n\nПримеры:\n• 10 клиентов × $500 × 50% = ~$125/мес\n• 30 клиентов × $1000 × 70% = ~$1 050/мес\n• 50 клиентов × $1500 × 84% = ~$3 150/мес\n\nКалькулятор выше — посчитает твою цифру по своим вводным.'
+          response: 'Доход складывается из трёх вещей: сколько клиентов приведёшь, какие у них депозиты и твой % комиссии (до 84%).\n\nПримеры:\n• 10 клиентов × $500 × 50% = ~$125/мес\n• 30 клиентов × $1000 × 70% = ~$1 050/мес\n• 50 клиентов × $1500 × 84% = ~$3 150/мес\n\n💎 С CopyFX-клиентами (копитрейдинг) доход выше в 3–5 раз — они торгуют постоянно.\n\nКалькулятор выше посчитает твою цифру по своим вводным.'
         },
         {
           triggers: /(как нач|с чего нач|новичок|первый шаг|первые шаги|с нуля)/i,
@@ -1849,12 +2302,24 @@
           response: 'Выплаты происходят 2 раза в месяц. Минимум для вывода — $10.\n\nСпособы:\n• Банковский перевод\n• Криптовалюты (BTC, USDT и др.)\n• Электронные кошельки (Skrill, Neteller, Perfect Money)'
         },
         {
-          triggers: /(надёж|надеж|обман|развод|скам|безопас|мошен|кидал|можно довер)/i,
-          response: 'RoboForex работает 17 лет, обслуживает 3.5 млн клиентов в 169 странах.\n\nЛицензия FSC + членство в Financial Commission категории A с компенсационным фондом $20 000 на каждый клиентский счёт.\n\nКомпания публичная, вывод средств проходит штатно — каждый месяц партнёры получают реальные выплаты.'
+          triggers: /(надёж|надеж|обман|развод|скам|безопас|мошен|кидал|можно довер|легит|честн)/i,
+          response: 'Коротко: RoboForex — один из старейших и крупнейших онлайн-брокеров.\n\n🏢 На рынке с 2009 года — 17+ лет\n🌍 3.5 млн+ клиентов в 169 странах\n📜 Лицензия FSC Belize №9759600 (Securities Industry Act 2021)\n⚖️ Член Financial Commission категории A — внешний арбитраж споров\n💰 Компенсационный фонд: до €20 000 на случай\n🛡️ Страховка гражданской ответственности: €2 500 000\n🏆 40+ профессиональных наград индустрии\n✅ Verify My Trade — независимая проверка качества исполнения сделок\n\nЗащита денег клиентов:\n• Сегрегированные счета (деньги клиентов отдельно от средств компании)\n• Защита от отрицательного баланса (счёт не уходит в минус при волатильности)\n• 2-факторная аутентификация в личном кабинете\n\nВыплаты партнёрам идут 17 лет без сбоев — это публичная статистика.'
         },
         {
-          triggers: /(fsc|лицен|регули|документ)/i,
-          response: 'FSC (Financial Services Commission) — международный финансовый регулятор, под которым работает RoboForex.\n\nДополнительно RoboForex — член Financial Commission категории A с компенсационным фондом $20 000 на каждый клиентский счёт на случай споров.'
+          triggers: /(закрое|банкрот|обанкрот|разорит|если что|если деньги пропад|сценарий.*плох)/i,
+          response: 'Если у брокера возникнут проблемы — деньги клиентов защищены несколькими уровнями:\n\n1️⃣ Сегрегированные счета — клиентские средства лежат отдельно от операционных денег компании. Их нельзя пустить на покрытие убытков.\n\n2️⃣ Страховка гражданской ответственности €2 500 000 — покрывает ошибки, мошенничество, халатность.\n\n3️⃣ Компенсационный фонд Financial Commission €20 000 на случай — выплачивается, если брокер не выполнит решение арбитража.\n\n4️⃣ Защита от отрицательного баланса — даже при экстремальной волатильности (как швейцарский франк в 2015) счёт не уходит в минус.\n\nЗа 17 лет работы RoboForex таких прецедентов не было — компания стабильно растёт.'
+        },
+        {
+          triggers: /(сегрегир|где.*деньги клиент|куда уход.*деньги|храняц|храненi.*денег|отдельн.*счёт)/i,
+          response: 'Деньги клиентов RoboForex хранятся на сегрегированных счетах в банках-партнёрах — отдельно от операционных средств компании.\n\nЧто это значит на практике:\n• Брокер физически не может использовать клиентские деньги в своих целях\n• Если у компании финансовые трудности — клиентские средства недоступны кредиторам\n• Это требование лицензии FSC Belize по Securities Industry Act 2021\n\nДополнительно: каждый клиент входит в личный кабинет через 2-факторную аутентификацию — даже при взломе email доступ к деньгам остаётся защищён.'
+        },
+        {
+          triggers: /(награды|репутац|премии|рейтинг.*брокер|конкурс|лучш.*брокер|премию)/i,
+          response: 'RoboForex получил 40+ наград индустрии за 17 лет работы. Из ключевых:\n\n🏆 «Лучший ECN-брокер» (несколько раз)\n🏆 «Лучшая партнёрская программа»\n🏆 «Лучший трейдинговый сервис для клиентов»\n🏆 «Самый инновационный брокер»\n🏆 «Лучший брокер для копитрейдинга» (CopyFX)\n\nДополнительные подтверждения:\n• Сертификат Verify My Trade — независимая проверка качества исполнения сделок\n• Категория A в Financial Commission (высший уровень доверия)\n• Член Compensation Fund — не все брокеры могут позволить себе это членство\n\nПолный список наград — на официальном сайте RoboForex в разделе «О компании».'
+        },
+        {
+          triggers: /(fsc|лицен|регули|документ|юрисдик|регистр|belize|белиз)/i,
+          response: 'RoboForex Ltd зарегистрирован и регулируется FSC (Financial Services Commission) Белиза. Лицензия №9759600 — действует по Securities Industry Act 2021.\n\nДополнительные слои защиты:\n• Член Financial Commission категории A — независимый арбитраж\n• Компенсационный фонд: €20 000 на случай (если брокер не выполнит решение арбитража)\n• Страхование гражданской ответственности: €2 500 000\n• Сертификат Verify My Trade — независимая проверка исполнения сделок\n\nДля более строгих регуляций есть смежная компания группы — RoboMarkets, она регулируется CySEC (Кипр) и BaFin (Германия). Это та же группа компаний, только под европейской юрисдикцией.'
         },
         {
           triggers: /(не получ|сложн|трудн|боюсь|опыт|умен|навык)/i,
