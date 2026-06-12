@@ -20,8 +20,10 @@
     --text-muted: #8A93A8;
     --text-dim: #5A6378;
     --accent: #22D3EE;
+    --accent-bright: #67E8F9;
     --accent-glow: rgba(34, 211, 238, 0.15);
     --warm: #F59E0B;
+    --warm-glow: rgba(245, 158, 11, 0.15);
     --success: #10B981;
     --danger: #EF4444;
 
@@ -45,12 +47,18 @@
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+
+    /* subtle grid texture */
+    background-image:
+      radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.04) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.03) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea { font-family: inherit; }
 
   /* === Layout === */
   .container {
@@ -73,7 +81,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(6, 8, 15, 0.8);
+    background: rgba(6, 8, 15, 0.78);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--border);
@@ -119,6 +127,7 @@
     transition: all 0.2s ease;
     white-space: nowrap;
     cursor: pointer;
+    border: 1px solid transparent;
   }
 
   .btn-primary {
@@ -127,9 +136,9 @@
   }
 
   .btn-primary:hover {
-    background: #67E8F9;
+    background: var(--accent-bright);
     transform: translateY(-1px);
-    box-shadow: 0 8px 24px var(--accent-glow);
+    box-shadow: 0 10px 30px var(--accent-glow);
   }
 
   .btn-secondary {
@@ -143,6 +152,17 @@
     border-color: var(--accent);
   }
 
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
   .btn-large {
     padding: 16px 32px;
     font-size: 17px;
@@ -150,7 +170,7 @@
 
   /* === Hero === */
   .hero {
-    padding: 120px 0 100px;
+    padding: 100px 0 80px;
     position: relative;
     overflow: hidden;
   }
@@ -160,7 +180,7 @@
     position: absolute;
     top: -200px; left: 50%;
     transform: translateX(-50%);
-    width: 800px; height: 800px;
+    width: 900px; height: 900px;
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
     pointer-events: none;
   }
@@ -188,12 +208,17 @@
     margin-bottom: 32px;
   }
 
-  .eyebrow::before {
-    content: '';
+  .eyebrow .dot {
     width: 6px; height: 6px;
     background: var(--accent);
     border-radius: 50%;
     box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
 
   h1 {
@@ -206,7 +231,7 @@
   }
 
   .number-accent {
-    background: linear-gradient(135deg, var(--accent) 0%, #67E8F9 50%, var(--warm) 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 50%, var(--warm) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -216,7 +241,7 @@
   .hero-sub {
     font-size: clamp(16px, 2vw, 19px);
     color: var(--text-muted);
-    max-width: 540px;
+    max-width: 560px;
     margin: 0 auto 40px;
     line-height: 1.5;
   }
@@ -226,7 +251,72 @@
     gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 80px;
+    margin-bottom: 56px;
+  }
+
+  /* === Live ticker === */
+  .ticker {
+    max-width: 720px;
+    margin: 0 auto 64px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .ticker-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--success);
+    flex-shrink: 0;
+  }
+
+  .ticker-label .dot {
+    width: 8px; height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .ticker-track {
+    flex: 1;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .ticker-content {
+    display: flex;
+    gap: 32px;
+    white-space: nowrap;
+    animation: scroll-left 30s linear infinite;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .ticker-content span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ticker-content b {
+    color: var(--accent);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   /* === Stats === */
@@ -248,7 +338,10 @@
     background: var(--bg-elevated);
     padding: 28px 20px;
     text-align: center;
+    transition: background 0.2s ease;
   }
+
+  .stat:hover { background: var(--surface); }
 
   .stat-num {
     font-family: var(--font-display);
@@ -320,12 +413,28 @@
     border-radius: var(--radius);
     padding: 28px;
     transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, var(--accent-glow));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
   }
 
   .why-card:hover {
     border-color: var(--border-bright);
     transform: translateY(-2px);
   }
+
+  .why-card:hover::before { opacity: 1; }
+
+  .why-card > * { position: relative; }
 
   .why-icon {
     font-size: 28px;
@@ -382,7 +491,7 @@
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 24px;
-    padding: 28px 0;
+    padding: 24px 0;
     position: relative;
   }
 
@@ -393,7 +502,7 @@
   .step-num {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 44px;
+    font-size: 32px;
     line-height: 1;
     color: var(--accent);
     width: 72px; height: 72px;
@@ -404,10 +513,16 @@
     position: relative;
     z-index: 1;
     font-variant-numeric: tabular-nums;
+    transition: all 0.2s ease;
+  }
+
+  .step:hover .step-num {
+    border-color: var(--accent);
+    box-shadow: 0 0 24px var(--accent-glow);
   }
 
   @media (max-width: 640px) {
-    .step-num { width: 52px; height: 52px; font-size: 28px; }
+    .step-num { width: 52px; height: 52px; font-size: 22px; }
   }
 
   .step-body h3 {
@@ -415,7 +530,7 @@
     font-weight: 700;
     font-size: 22px;
     margin-bottom: 8px;
-    padding-top: 14px;
+    padding-top: 16px;
   }
 
   .step-body p {
@@ -494,9 +609,7 @@
     transition: transform 0.15s ease;
   }
 
-  .calc-input input[type=range]::-webkit-slider-thumb:hover {
-    transform: scale(1.15);
-  }
+  .calc-input input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
   .calc-input input[type=range]::-moz-range-thumb {
     width: 20px; height: 20px;
@@ -559,118 +672,292 @@
     font-size: 13px;
   }
 
-  /* === Bot section === */
-  .bot-grid {
+  /* === Tier carousel === */
+  .tiers-wrap {
+    position: relative;
+  }
+
+  .tiers {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(280px, 320px);
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 16px 24px 24px;
+    margin: 0 -24px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
   }
 
-  @media (max-width: 900px) {
-    .bot-grid { grid-template-columns: 1fr; gap: 32px; }
-  }
+  .tiers::-webkit-scrollbar { display: none; }
 
-  .bot-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 32px;
-  }
-
-  @media (max-width: 480px) {
-    .bot-features { grid-template-columns: 1fr; }
-  }
-
-  .bot-feat {
+  .tier {
+    scroll-snap-align: start;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 20px;
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
   }
 
-  .bot-feat-icon {
-    font-size: 22px;
+  .tier::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--tier-color, var(--accent));
+  }
+
+  .tier:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-bright);
+  }
+
+  .tier[data-tier="starter"] { --tier-color: #94A3B8; }
+  .tier[data-tier="active"]  { --tier-color: #22D3EE; }
+  .tier[data-tier="pro"]     { --tier-color: #F59E0B; }
+  .tier[data-tier="top"]     { --tier-color: #EC4899; }
+
+  .tier-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tier-color);
     margin-bottom: 12px;
   }
 
-  .bot-feat h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 6px;
+  .tier-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
   }
 
-  .bot-feat p {
+  .tier-income {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1;
+    margin-bottom: 4px;
+    color: var(--tier-color);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .tier-income-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .tier-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .tier-stats {
+    display: grid;
+    gap: 12px;
+  }
+
+  .tier-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 14px;
+  }
+
+  .tier-stat span:first-child {
+    color: var(--text-muted);
+  }
+
+  .tier-stat span:last-child {
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tier-yearly {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .tier-yearly span:first-child {
     font-size: 13px;
     color: var(--text-muted);
   }
 
-  /* Chat mockup */
-  .chat {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  .tier-yearly span:last-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
   }
 
-  .chat-head {
+  .tiers-nav {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: var(--surface);
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tier-arrow {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-bright);
+    color: var(--text);
+    display: grid; place-items: center;
+    font-size: 18px;
+    transition: all 0.2s ease;
+  }
+
+  .tier-arrow:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .tier-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .tier-dots {
+    display: flex;
+    gap: 6px;
+    margin: 0 12px;
+  }
+
+  .tier-dot {
+    width: 8px; height: 8px;
+    background: var(--border-bright);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .tier-dot.active {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 999px;
+  }
+
+  /* === AI Chat === */
+  .ai-section {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
-  .chat-avatar {
-    width: 40px; height: 40px;
+  .ai-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .ai-chat {
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+
+  .ai-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    background: linear-gradient(180deg, var(--surface-hover), var(--surface));
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ai-avatar {
+    width: 44px; height: 44px;
     background: linear-gradient(135deg, var(--accent), #0EA5E9);
     border-radius: 50%;
     display: grid; place-items: center;
-    font-size: 18px;
+    font-size: 20px;
+    flex-shrink: 0;
+    position: relative;
   }
 
-  .chat-meta strong {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
-  .chat-meta span {
-    font-size: 12px;
-    color: var(--success);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .chat-meta span::before {
+  .ai-avatar::after {
     content: '';
-    width: 6px; height: 6px;
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 12px; height: 12px;
     background: var(--success);
+    border: 2px solid var(--surface);
     border-radius: 50%;
   }
 
-  .chat-body {
-    padding: 20px;
+  .ai-meta strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 2px;
+    font-family: var(--font-display);
+  }
+
+  .ai-meta span {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .ai-meta span b {
+    color: var(--success);
+  }
+
+  .ai-body {
+    padding: 24px;
+    min-height: 360px;
+    max-height: 500px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    min-height: 240px;
+    scroll-behavior: smooth;
+  }
+
+  .ai-body::-webkit-scrollbar { width: 6px; }
+  .ai-body::-webkit-scrollbar-track { background: transparent; }
+  .ai-body::-webkit-scrollbar-thumb {
+    background: var(--border-bright);
+    border-radius: 3px;
   }
 
   .msg {
-    max-width: 80%;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.4;
+    max-width: 88%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    animation: msg-in 0.3s ease;
+  }
+
+  @keyframes msg-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .msg-bot {
     align-self: flex-start;
-    background: var(--surface);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
   }
 
@@ -682,32 +969,120 @@
     font-weight: 500;
   }
 
-  .chat-input {
+  .typing {
+    align-self: flex-start;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 4px;
+  }
+
+  .typing span {
+    width: 6px; height: 6px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    animation: typing 1.4s ease-in-out infinite;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  .ai-suggest {
+    padding: 0 24px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ai-suggest-label {
+    width: 100%;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .suggest-chip {
+    padding: 8px 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-bright);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--text);
+    transition: all 0.15s ease;
+  }
+
+  .suggest-chip:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #06080F;
+  }
+
+  .ai-input {
     display: flex;
     gap: 8px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
+    padding: 16px 20px;
     background: var(--surface);
   }
 
-  .chat-input-field {
+  .ai-input input {
     flex: 1;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 13px;
-    color: var(--text-dim);
+    padding: 12px 18px;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s ease;
   }
 
-  .chat-send {
-    width: 32px; height: 32px;
+  .ai-input input:focus {
+    border-color: var(--accent);
+  }
+
+  .ai-send {
+    width: 44px; height: 44px;
     background: var(--accent);
     color: #06080F;
     border-radius: 50%;
     display: grid; place-items: center;
     font-weight: 800;
+    font-size: 18px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
   }
+
+  .ai-send:hover {
+    background: var(--accent-bright);
+    transform: scale(1.05);
+  }
+
+  .ai-send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .ai-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .ai-cta-link:hover { color: var(--accent-bright); }
 
   /* === Community === */
   .community-grid {
@@ -782,9 +1157,7 @@
     min-width: 600px;
   }
 
-  thead {
-    background: var(--surface);
-  }
+  thead { background: var(--surface); }
 
   th {
     text-align: left;
@@ -803,9 +1176,7 @@
     font-size: 15px;
   }
 
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
+  tbody tr:last-child td { border-bottom: none; }
 
   td:first-child {
     font-weight: 700;
@@ -824,9 +1195,7 @@
     background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.08) 0%, transparent 60%);
   }
 
-  .final-cta h2 {
-    margin-bottom: 20px;
-  }
+  .final-cta h2 { margin-bottom: 20px; }
 
   .final-cta p {
     color: var(--text-muted);
@@ -867,7 +1236,7 @@
   .foot a { color: var(--text-muted); }
   .foot a:hover { color: var(--accent); }
 
-  /* === Mobile button block === */
+  /* Mobile button block */
   @media (max-width: 480px) {
     .hero-actions .btn,
     .final-actions .btn {
@@ -882,6 +1251,7 @@
       transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
+    .ticker-content { animation: none; }
   }
 </style>
 </head>
@@ -902,29 +1272,49 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-content">
-    <span class="eyebrow">AI-агент · RoboForex Partners</span>
+    <span class="eyebrow"><span class="dot"></span>AI-агент · RoboForex Partners</span>
     <h1>Зарабатывай до <span class="number-accent">84%</span> комиссии брокера</h1>
     <p class="hero-sub">AI-агент сам ведёт новичка от первого вопроса до регистрации. Твоя задача — делиться ссылкой.</p>
     <div class="hero-actions">
-      <a href="#bot" class="btn btn-primary btn-large">Запустить AI-агента →</a>
-      <a href="#how" class="btn btn-secondary btn-large">Как это работает</a>
+      <a href="#ai-chat" class="btn btn-primary btn-large">Спросить AI →</a>
+      <a href="#tiers" class="btn btn-secondary btn-large">Сколько можно заработать</a>
+    </div>
+
+    <div class="ticker">
+      <div class="ticker-label"><span class="dot"></span>LIVE</div>
+      <div class="ticker-track">
+        <div class="ticker-content">
+          <span>Алексей М. — выплата <b>$342</b></span>
+          <span>Ирина К. — новый клиент <b>+$50/мес</b></span>
+          <span>Дмитрий В. — выплата <b>$1 280</b></span>
+          <span>Сергей П. — 3 уровня сети активны</span>
+          <span>Марина С. — выплата <b>$215</b></span>
+          <span>Олег Р. — апгрейд до Affiliate 84%</span>
+          <span>Алексей М. — выплата <b>$342</b></span>
+          <span>Ирина К. — новый клиент <b>+$50/мес</b></span>
+          <span>Дмитрий В. — выплата <b>$1 280</b></span>
+          <span>Сергей П. — 3 уровня сети активны</span>
+          <span>Марина С. — выплата <b>$215</b></span>
+          <span>Олег Р. — апгрейд до Affiliate 84%</span>
+        </div>
+      </div>
     </div>
 
     <div class="stats">
       <div class="stat">
-        <div class="stat-num">84%</div>
+        <div class="stat-num" data-count="84" data-suffix="%">0%</div>
         <div class="stat-label">Макс. комиссия</div>
       </div>
       <div class="stat">
-        <div class="stat-num">17 лет</div>
+        <div class="stat-num" data-count="17" data-suffix=" лет">0</div>
         <div class="stat-label">RoboForex на рынке</div>
       </div>
       <div class="stat">
-        <div class="stat-num">3.5M</div>
+        <div class="stat-num" data-count="3.5" data-suffix="M">0</div>
         <div class="stat-label">Клиентов в 169 странах</div>
       </div>
       <div class="stat">
-        <div class="stat-num">5</div>
+        <div class="stat-num" data-count="5" data-suffix="">0</div>
         <div class="stat-label">Уровней реферальной сети</div>
       </div>
     </div>
@@ -979,55 +1369,13 @@
     </div>
 
     <div class="steps-wrap">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h3>Знакомство</h3>
-          <p>Агент здоровается, узнаёт цель новичка — заработок, трейдинг или инвестиции. Персонализирует весь дальнейший диалог.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h3>Выявление опыта</h3>
-          <p>Новичок или опытный трейдер? Агент адаптирует язык и глубину объяснений под каждого.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h3>Рассказ о RoboForex</h3>
-          <p>Лицензия, надёжность, 17 лет на рынке, 3.5 млн клиентов — агент строит доверие фактами, не словами.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h3>Партнёрская программа</h3>
-          <p>Объясняет, как работают комиссии, 5-уровневая сеть и программа лояльности. Считает потенциальный доход.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <h3>Снятие возражений</h3>
-          <p>«Это сложно», «нужны деньги», «не доверяю» — агент обрабатывает каждое возражение мягко и с фактами.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">6</div>
-        <div class="step-body">
-          <h3>Регистрация по ссылке</h3>
-          <p>Агент ведёт к кнопке регистрации с твоей реферальной ссылкой. Объясняет каждый шаг.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">7</div>
-        <div class="step-body">
-          <h3>Твой звонок</h3>
-          <p>Агент собирает контакт и передаёт тебе. Человек уже прогрет — тебе остаётся познакомиться голосом.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Знакомство</h3><p>Агент здоровается, узнаёт цель новичка — заработок, трейдинг или инвестиции. Персонализирует весь дальнейший диалог.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Выявление опыта</h3><p>Новичок или опытный трейдер? Агент адаптирует язык и глубину объяснений под каждого.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Рассказ о RoboForex</h3><p>Лицензия, надёжность, 17 лет на рынке, 3.5 млн клиентов — агент строит доверие фактами, не словами.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Партнёрская программа</h3><p>Объясняет, как работают комиссии, 5-уровневая сеть и программа лояльности. Считает потенциальный доход.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Снятие возражений</h3><p>«Это сложно», «нужны деньги», «не доверяю» — агент обрабатывает каждое возражение мягко и с фактами.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Регистрация по ссылке</h3><p>Агент ведёт к кнопке регистрации с твоей реферальной ссылкой. Объясняет каждый шаг.</p></div></div>
+      <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Твой звонок</h3><p>Агент собирает контакт и передаёт тебе. Человек уже прогрет — тебе остаётся познакомиться голосом.</p></div></div>
     </div>
   </div>
 </section>
@@ -1080,71 +1428,145 @@
   </div>
 </section>
 
-<!-- BOT -->
-<section id="bot">
+<!-- TIERS CAROUSEL -->
+<section id="tiers">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">AI-Агент</div>
-      <h2>Чат-бот, который работает за тебя</h2>
-      <p>Полностью автоматическая воронка. Отвечает на вопросы, снимает возражения, ведёт к регистрации 24/7.</p>
+      <div class="section-eyebrow">Сценарии дохода</div>
+      <h2>От новичка до топ-партнёра</h2>
+      <p>Четыре реальных уровня партнёрства. Посмотри, как растёт доход с количеством клиентов.</p>
     </div>
 
-    <div class="bot-grid">
-      <div>
-        <div class="chat">
-          <div class="chat-head">
-            <div class="chat-avatar">🤖</div>
-            <div class="chat-meta">
-              <strong>RoboForex AI Агент</strong>
-              <span>онлайн · Groq AI</span>
-            </div>
+    <div class="tiers-wrap">
+      <div class="tiers" id="tiers">
+
+        <div class="tier" data-tier="starter">
+          <div class="tier-tag">Уровень 1</div>
+          <div class="tier-name">Новичок</div>
+          <div class="tier-income">$30</div>
+          <div class="tier-income-label">в месяц</div>
+          <div class="tier-divider"></div>
+          <div class="tier-stats">
+            <div class="tier-stat"><span>Клиентов</span><span>5</span></div>
+            <div class="tier-stat"><span>Средний депозит</span><span>$200</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>60%</span></div>
+            <div class="tier-stat"><span>Уровни сети</span><span>1</span></div>
           </div>
-          <div class="chat-body">
-            <div class="msg msg-bot">Привет! Я помогу разобраться, как зарабатывать с RoboForex. Что тебе интересно — трейдинг или партнёрская программа?</div>
-            <div class="msg msg-user">Хочу зарабатывать на партнёрке</div>
-            <div class="msg msg-bot">Отличный выбор. RoboForex платит до 84% от комиссии брокера с каждой сделки твоих клиентов. Расскажу, как это работает?</div>
-            <div class="msg msg-user">Да, давай</div>
-          </div>
-          <div class="chat-input">
-            <div class="chat-input-field">Напишите сообщение…</div>
-            <div class="chat-send">➤</div>
+          <div class="tier-yearly">
+            <span>За год</span><span>$360</span>
           </div>
         </div>
+
+        <div class="tier" data-tier="active">
+          <div class="tier-tag">Уровень 2</div>
+          <div class="tier-name">Активный</div>
+          <div class="tier-income">$250</div>
+          <div class="tier-income-label">в месяц</div>
+          <div class="tier-divider"></div>
+          <div class="tier-stats">
+            <div class="tier-stat"><span>Клиентов</span><span>20</span></div>
+            <div class="tier-stat"><span>Средний депозит</span><span>$500</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>70%</span></div>
+            <div class="tier-stat"><span>Уровни сети</span><span>2</span></div>
+          </div>
+          <div class="tier-yearly">
+            <span>За год</span><span>$3 000</span>
+          </div>
+        </div>
+
+        <div class="tier" data-tier="pro">
+          <div class="tier-tag">Уровень 3</div>
+          <div class="tier-name">Профи</div>
+          <div class="tier-income">$1 750</div>
+          <div class="tier-income-label">в месяц</div>
+          <div class="tier-divider"></div>
+          <div class="tier-stats">
+            <div class="tier-stat"><span>Клиентов</span><span>50</span></div>
+            <div class="tier-stat"><span>Средний депозит</span><span>$1 000</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>70%</span></div>
+            <div class="tier-stat"><span>Уровни сети</span><span>3</span></div>
+          </div>
+          <div class="tier-yearly">
+            <span>За год</span><span>$21 000</span>
+          </div>
+        </div>
+
+        <div class="tier" data-tier="top">
+          <div class="tier-tag">Уровень 4</div>
+          <div class="tier-name">Топ-партнёр</div>
+          <div class="tier-income">$8 400</div>
+          <div class="tier-income-label">в месяц</div>
+          <div class="tier-divider"></div>
+          <div class="tier-stats">
+            <div class="tier-stat"><span>Клиентов</span><span>100</span></div>
+            <div class="tier-stat"><span>Средний депозит</span><span>$2 000</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>84%</span></div>
+            <div class="tier-stat"><span>Уровни сети</span><span>5</span></div>
+          </div>
+          <div class="tier-yearly">
+            <span>За год</span><span>$100 800</span>
+          </div>
+        </div>
+
       </div>
 
-      <div>
-        <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 16px;">Автопилот для твоей воронки</h3>
-        <p style="color: var(--text-muted); margin-bottom: 8px;">Пока ты занят основной работой, бот прогревает клиентов и собирает заявки. Тебе остаётся забрать готовый контакт.</p>
+      <div class="tiers-nav">
+        <button class="tier-arrow" id="tierPrev" aria-label="Предыдущий">←</button>
+        <div class="tier-dots" id="tierDots"></div>
+        <button class="tier-arrow" id="tierNext" aria-label="Следующий">→</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="bot-features">
-          <div class="bot-feat">
-            <div class="bot-feat-icon">🤖</div>
-            <h4>Понимает контекст</h4>
-            <p>Powered by Groq AI — помнит диалог, адаптируется под каждого человека.</p>
-          </div>
-          <div class="bot-feat">
-            <div class="bot-feat-icon">⏱️</div>
-            <h4>Работает 24/7</h4>
-            <p>Пока ты спишь — бот прогревает новых клиентов и собирает заявки.</p>
-          </div>
-          <div class="bot-feat">
-            <div class="bot-feat-icon">📱</div>
-            <h4>Telegram + сайт</h4>
-            <p>Бот работает в Telegram и встраивается на любой лендинг через виджет.</p>
-          </div>
-          <div class="bot-feat">
-            <div class="bot-feat-icon">📊</div>
-            <h4>Собирает контакты</h4>
-            <p>Заинтересованный оставляет имя и телефон — ты получаешь уведомление.</p>
+<!-- AI CHAT (interactive) -->
+<section class="ai-section" id="ai-chat">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">AI-помощник</div>
+      <h2>Задай вопрос про заработок</h2>
+      <p>AI отвечает на все типичные вопросы про партнёрку, комиссии и старт. Для сложных кейсов — переход к главному агенту в Telegram.</p>
+    </div>
+
+    <div class="ai-wrap">
+      <div class="ai-chat">
+        <div class="ai-head">
+          <div class="ai-avatar">🤖</div>
+          <div class="ai-meta">
+            <strong>RoboForex AI Помощник</strong>
+            <span><b>● онлайн</b> · отвечает за секунды</span>
           </div>
         </div>
+
+        <div class="ai-body" id="aiBody">
+          <div class="msg msg-bot">Привет! Я AI-помощник RoboForex Partners. Отвечу на любые вопросы про заработок, комиссии и регистрацию.
+
+Можешь задать вопрос сам или выбрать из подсказок ниже 👇</div>
+        </div>
+
+        <div class="ai-suggest" id="aiSuggest">
+          <div class="ai-suggest-label">Популярные вопросы</div>
+          <button class="suggest-chip" data-q="Сколько можно заработать?">💰 Сколько можно заработать?</button>
+          <button class="suggest-chip" data-q="Как начать с нуля?">🚀 Как начать с нуля?</button>
+          <button class="suggest-chip" data-q="Это бесплатно?">💳 Это бесплатно?</button>
+          <button class="suggest-chip" data-q="Нужны ли вложения?">💼 Нужны ли вложения?</button>
+          <button class="suggest-chip" data-q="Что такое 84%?">📊 Что такое 84%?</button>
+          <button class="suggest-chip" data-q="Когда выплаты?">📅 Когда выплаты?</button>
+          <button class="suggest-chip" data-q="Это надёжно?">🛡️ Это надёжно?</button>
+          <button class="suggest-chip" data-q="Как работают 5 уровней?">🌐 Как работают 5 уровней?</button>
+        </div>
+
+        <form class="ai-input" id="aiForm">
+          <input type="text" id="aiInput" placeholder="Напиши свой вопрос…" autocomplete="off">
+          <button type="submit" class="ai-send" id="aiSend" aria-label="Отправить">➤</button>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
 <!-- COMMUNITY -->
-<section style="background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<section>
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">Сообщество</div>
@@ -1156,7 +1578,7 @@
       <div class="com-card">
         <div class="com-card-icon">🤖</div>
         <h3>AI Партнёрский Агент</h3>
-        <p>Задай любой вопрос — бот ответит мгновенно. Помогает новичкам разобраться с партнёрской программой шаг за шагом.</p>
+        <p>Полноценный AI с памятью диалога. Помогает новичкам разобраться с партнёрской программой шаг за шагом.</p>
         <ul>
           <li>Отвечает на любые вопросы о RoboForex</li>
           <li>Помогает с регистрацией и первыми шагами</li>
@@ -1183,7 +1605,7 @@
 </section>
 
 <!-- COMMISSION TABLE -->
-<section>
+<section style="background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">Структура комиссий</div>
@@ -1202,30 +1624,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Уровень 1</td>
-            <td>Твои прямые клиенты</td>
-            <td><span class="accent">до 84%</span> (Affiliate)</td>
-            <td>$840 с $1000 комиссии</td>
-          </tr>
-          <tr>
-            <td>Уровень 2</td>
-            <td>Клиенты твоих партнёров</td>
-            <td>до 20% от уровня 1</td>
-            <td>авто, без участия</td>
-          </tr>
-          <tr>
-            <td>Уровень 3</td>
-            <td>Следующий уровень сети</td>
-            <td>до 10% от уровня 1</td>
-            <td>авто, без участия</td>
-          </tr>
-          <tr>
-            <td>Уровни 4–5</td>
-            <td>Глубина сети</td>
-            <td>до 5% от уровня 1</td>
-            <td>авто, без участия</td>
-          </tr>
+          <tr><td>Уровень 1</td><td>Твои прямые клиенты</td><td><span class="accent">до 84%</span> (Affiliate)</td><td>$840 с $1000 комиссии</td></tr>
+          <tr><td>Уровень 2</td><td>Клиенты твоих партнёров</td><td>до 20% от уровня 1</td><td>авто, без участия</td></tr>
+          <tr><td>Уровень 3</td><td>Следующий уровень сети</td><td>до 10% от уровня 1</td><td>авто, без участия</td></tr>
+          <tr><td>Уровни 4–5</td><td>Глубина сети</td><td>до 5% от уровня 1</td><td>авто, без участия</td></tr>
         </tbody>
       </table>
     </div>
@@ -1256,22 +1658,20 @@
 </footer>
 
 <script>
-  // Calculator — wrapped in try/catch so any error never breaks the page
+  /* ===== Calculator ===== */
   (function () {
     try {
       var clients = document.getElementById('clients');
       var deposit = document.getElementById('deposit');
       var commission = document.getElementById('commission');
+      if (!clients || !deposit || !commission) return;
 
       var clientsVal = document.getElementById('clientsVal');
       var depositVal = document.getElementById('depositVal');
       var commissionVal = document.getElementById('commissionVal');
-
       var resMonth = document.getElementById('resMonth');
       var resQuarter = document.getElementById('resQuarter');
       var resYear = document.getElementById('resYear');
-
-      if (!clients || !deposit || !commission) return;
 
       function fmt(n) {
         return '$' + Math.round(n).toLocaleString('ru-RU').replace(/,/g, ' ');
@@ -1281,14 +1681,11 @@
         var c = parseFloat(clients.value) || 0;
         var d = parseFloat(deposit.value) || 0;
         var p = parseFloat(commission.value) || 0;
-
-        // Model: broker takes ~5% of deposit as monthly commission; partner gets p%
         var monthly = c * d * 0.05 * (p / 100);
 
         clientsVal.textContent = c;
         depositVal.textContent = d.toLocaleString('ru-RU').replace(/,/g, ' ');
         commissionVal.textContent = p;
-
         resMonth.textContent = fmt(monthly);
         resQuarter.textContent = fmt(monthly * 3);
         resYear.textContent = fmt(monthly * 12);
@@ -1297,11 +1694,307 @@
       clients.addEventListener('input', recalc);
       deposit.addEventListener('input', recalc);
       commission.addEventListener('input', recalc);
-
       recalc();
-    } catch (e) {
-      console.error('Calculator error:', e);
-    }
+    } catch (e) { console.error('Calc error:', e); }
+  })();
+
+  /* ===== Animated stat counters ===== */
+  (function () {
+    try {
+      var stats = document.querySelectorAll('.stat-num[data-count]');
+      if (!stats.length || !('IntersectionObserver' in window)) {
+        // Fallback: just show final value
+        stats.forEach(function(s){
+          s.textContent = s.getAttribute('data-count') + (s.getAttribute('data-suffix') || '');
+        });
+        return;
+      }
+
+      function animate(el) {
+        var target = parseFloat(el.getAttribute('data-count'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var isFloat = target % 1 !== 0;
+        var duration = 1200;
+        var start = performance.now();
+
+        function step(now) {
+          var t = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = target * eased;
+          el.textContent = (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = (isFloat ? target.toFixed(1) : target) + suffix;
+        }
+        requestAnimationFrame(step);
+      }
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      stats.forEach(function(s){ io.observe(s); });
+    } catch (e) { console.error('Counter error:', e); }
+  })();
+
+  /* ===== Tier carousel ===== */
+  (function () {
+    try {
+      var track = document.getElementById('tiers');
+      var prev = document.getElementById('tierPrev');
+      var next = document.getElementById('tierNext');
+      var dotsBox = document.getElementById('tierDots');
+      if (!track || !prev || !next || !dotsBox) return;
+
+      var cards = track.querySelectorAll('.tier');
+      var count = cards.length;
+
+      // Build dots
+      for (var i = 0; i < count; i++) {
+        var d = document.createElement('button');
+        d.className = 'tier-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Слайд ' + (i + 1));
+        d.dataset.idx = i;
+        dotsBox.appendChild(d);
+      }
+      var dots = dotsBox.querySelectorAll('.tier-dot');
+
+      function cardWidth() {
+        if (!cards[0]) return 320;
+        var styles = getComputedStyle(track);
+        var gap = parseInt(styles.columnGap || styles.gap, 10) || 20;
+        return cards[0].getBoundingClientRect().width + gap;
+      }
+
+      function scrollToIdx(idx) {
+        idx = Math.max(0, Math.min(count - 1, idx));
+        track.scrollTo({ left: idx * cardWidth(), behavior: 'smooth' });
+      }
+
+      function currentIdx() {
+        return Math.round(track.scrollLeft / cardWidth());
+      }
+
+      function updateUI() {
+        var idx = currentIdx();
+        dots.forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+        prev.disabled = idx === 0;
+        next.disabled = idx === count - 1;
+      }
+
+      prev.addEventListener('click', function() { scrollToIdx(currentIdx() - 1); });
+      next.addEventListener('click', function() { scrollToIdx(currentIdx() + 1); });
+
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() {
+          scrollToIdx(parseInt(d.dataset.idx, 10));
+        });
+      });
+
+      var t;
+      track.addEventListener('scroll', function() {
+        clearTimeout(t);
+        t = setTimeout(updateUI, 80);
+      });
+
+      updateUI();
+    } catch (e) { console.error('Carousel error:', e); }
+  })();
+
+  /* ===== AI Chat (interactive Q&A) ===== */
+  (function () {
+    try {
+      var form = document.getElementById('aiForm');
+      var input = document.getElementById('aiInput');
+      var body = document.getElementById('aiBody');
+      var suggest = document.getElementById('aiSuggest');
+      if (!form || !input || !body) return;
+
+      var TG = 'https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5';
+
+      // Knowledge base. Each entry: triggers (regex), response (string with optional {tg} placeholder).
+      var KB = [
+        {
+          triggers: /(сколько|зараб|доход|выруч|получ|деньг.*месяц|приб)/i,
+          response: 'Доход складывается из трёх вещей: сколько клиентов приведёшь, какие у них депозиты и твой % комиссии (до 84%).\n\nПримеры:\n• 10 клиентов × $500 × 50% = ~$125/мес\n• 30 клиентов × $1000 × 70% = ~$1 050/мес\n• 50 клиентов × $1500 × 84% = ~$3 150/мес\n\nКалькулятор выше — посчитает твою цифру по своим вводным.'
+        },
+        {
+          triggers: /(как нач|с чего нач|новичок|первый шаг|первые шаги|с нуля)/i,
+          response: 'Три шага:\n\n1️⃣ Регистрируешься партнёром (бесплатно, ~2 минуты)\n2️⃣ Получаешь личную ссылку\n3️⃣ Делишься ссылкой — AI-агент сам общается с клиентами и ведёт их к регистрации\n\nКомиссию получаешь пожизненно с каждой сделки твоих клиентов.'
+        },
+        {
+          triggers: /(беспл|плат[еия]|стоит|цена|сколько стоит)/i,
+          response: 'Регистрация партнёром — полностью бесплатная. Никаких взносов, абонплат или скрытых платежей. RoboForex платит тебе, а не наоборот.'
+        },
+        {
+          triggers: /(вложен|инвест|свои деньги|капитал|стартовый)/i,
+          response: 'Никаких вложений не нужно. Партнёрская программа — это не трейдинг. Ты не вкладываешь свои деньги. Ты получаешь процент от комиссии брокера за клиентов, которых привёл.'
+        },
+        {
+          triggers: /(84|комисси|процент|спред|affiliate)/i,
+          response: '84% — это твоя доля от комиссии брокера на счёте типа Affiliate. Когда твой клиент совершает сделку и брокер берёт комиссию, ты получаешь до 84% от этой суммы.\n\nЭто работает пожизненно — пока клиент торгует, ты получаешь свою долю с каждой его сделки.'
+        },
+        {
+          triggers: /(уровн|сеть|реферал|пирамид)/i,
+          response: '5 уровней реферальной сети:\n\n• Уровень 1 (твои прямые клиенты) — до 84%\n• Уровень 2 — до 20% от уровня 1\n• Уровень 3 — до 10%\n• Уровни 4-5 — до 5%\n\nТо есть когда твой партнёр приводит своих клиентов — ты тоже получаешь долю. Это и есть пассивный доход.'
+        },
+        {
+          triggers: /(выпла|когда плат|вывод|payout|payday)/i,
+          response: 'Выплаты происходят 2 раза в месяц. Минимум для вывода — $10.\n\nСпособы:\n• Банковский перевод\n• Криптовалюты (BTC, USDT и др.)\n• Электронные кошельки (Skrill, Neteller, Perfect Money)'
+        },
+        {
+          triggers: /(надёж|надеж|обман|развод|скам|безопас|мошен|кидал|можно довер)/i,
+          response: 'RoboForex работает 17 лет, обслуживает 3.5 млн клиентов в 169 странах.\n\nЛицензия FSC + членство в Financial Commission категории A с компенсационным фондом $20 000 на каждый клиентский счёт.\n\nКомпания публичная, вывод средств проходит штатно — каждый месяц партнёры получают реальные выплаты.'
+        },
+        {
+          triggers: /(fsc|лицен|регули|документ)/i,
+          response: 'FSC (Financial Services Commission) — международный финансовый регулятор, под которым работает RoboForex.\n\nДополнительно RoboForex — член Financial Commission категории A с компенсационным фондом $20 000 на каждый клиентский счёт на случай споров.'
+        },
+        {
+          triggers: /(не получ|сложн|трудн|боюсь|опыт|умен|навык)/i,
+          response: 'Главное — AI-агент делает 95% работы. Он сам:\n• Общается с клиентами\n• Объясняет программу\n• Снимает возражения\n• Ведёт к регистрации\n\nТебе нужно только делиться ссылкой в соцсетях, чатах, друзьям. Никаких сложных навыков не требуется — рассказывать ничего самому не нужно.'
+        },
+        {
+          triggers: /(врем|сколько часов|занятост|совмещ|работ|подработ)/i,
+          response: 'Можно совмещать с основной работой. AI-агент работает 24/7 — даже когда ты спишь.\n\nАктивным партнёрам достаточно 30-60 минут в день, чтобы:\n• Делиться ссылкой в новых местах\n• Принимать звонки от прогретых клиентов\n• Анализировать статистику'
+        },
+        {
+          triggers: /(telegram|телеграм|бот|канал)/i,
+          response: 'Главный AI-агент работает в Telegram. Туда стекаются все клиенты, которых ты приводишь. Он сам ведёт диалог, отвечает на вопросы, готовит к регистрации.\n\nТы подключаешься только когда клиент уже почти готов — тебе остаётся «закрыть» его голосовым звонком.'
+        },
+        {
+          triggers: /(топ-партн|максимум|потолок|лимит|самые большие)/i,
+          response: 'Потолка нет. Топ-партнёры RoboForex зарабатывают $5 000 – $50 000 в месяц и больше.\n\nФормула роста проста: больше клиентов × больше уровней сети × Affiliate-счёт 84%.\n\nПример: 100 активных клиентов × $2 000 депозит × 84% = ~$8 400/мес (+ доход с сети).'
+        },
+        {
+          triggers: /(где брать|откуда брать|трафик|клиент.*найти|привлеч|маркет|реклам)/i,
+          response: 'Источники клиентов:\n\n• Соцсети (Instagram, TikTok, YouTube, ВК)\n• Telegram-каналы и чаты\n• Друзья и знакомые\n• Форумы про трейдинг и инвестиции\n• Контекстная и таргетированная реклама\n• Личный блог или сайт\n\nAI-агент в Telegram сам прогревает любой холодный трафик.'
+        },
+        {
+          triggers: /(страна|регион|где работ|россия|украина|казах|беларус|снг)/i,
+          response: 'RoboForex работает в 169 странах. Партнёрская программа доступна по всему миру — клиентов можно приводить из любой страны.\n\nПриоритетные регионы для русскоязычных партнёров: Россия, Украина, Казахстан, Беларусь, страны СНГ.'
+        }
+      ];
+
+      var fallback = 'Хороший вопрос! Я отвечаю на типичные темы про заработок, но для деталей лучше написать главному AI-агенту — у него есть память диалога и полный контекст.\n\n→ [Написать в Telegram]({tg})';
+
+      function findResponse(text) {
+        for (var i = 0; i < KB.length; i++) {
+          if (KB[i].triggers.test(text)) return KB[i].response;
+        }
+        return fallback;
+      }
+
+      function scrollDown() {
+        body.scrollTop = body.scrollHeight;
+      }
+
+      function addUserMsg(text) {
+        var el = document.createElement('div');
+        el.className = 'msg msg-user';
+        el.textContent = text;
+        body.appendChild(el);
+        scrollDown();
+      }
+
+      function showTyping() {
+        var el = document.createElement('div');
+        el.className = 'typing';
+        el.id = 'typing-indicator';
+        el.innerHTML = '<span></span><span></span><span></span>';
+        body.appendChild(el);
+        scrollDown();
+        return el;
+      }
+
+      function removeTyping() {
+        var el = document.getElementById('typing-indicator');
+        if (el) el.remove();
+      }
+
+      function renderBotText(target, text) {
+        // Replace {tg} placeholder with link
+        var parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+        parts.forEach(function(part) {
+          var m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+          if (m) {
+            var a = document.createElement('a');
+            a.href = m[2].replace('{tg}', TG);
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.className = 'ai-cta-link';
+            a.textContent = m[1] + ' →';
+            target.appendChild(a);
+          } else {
+            target.appendChild(document.createTextNode(part));
+          }
+        });
+      }
+
+      function addBotMsg(text) {
+        var el = document.createElement('div');
+        el.className = 'msg msg-bot';
+        body.appendChild(el);
+
+        // Typewriter effect (character by character)
+        var i = 0;
+        var plain = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'); // plain version for typing
+        var speed = 12; // ms per char
+        function tick() {
+          if (i <= plain.length) {
+            el.textContent = plain.slice(0, i);
+            i++;
+            scrollDown();
+            setTimeout(tick, speed);
+          } else {
+            // Done typing — replace with linked version if there's a link
+            if (/\[[^\]]+\]\([^)]+\)/.test(text)) {
+              el.innerHTML = '';
+              renderBotText(el, text);
+            }
+          }
+        }
+        tick();
+      }
+
+      function ask(question) {
+        if (!question || !question.trim()) return;
+        addUserMsg(question.trim());
+        input.value = '';
+
+        // Hide suggestions after first question
+        if (suggest && !suggest.classList.contains('used')) {
+          suggest.classList.add('used');
+          suggest.style.display = 'none';
+        }
+
+        var typing = showTyping();
+        var delay = 500 + Math.random() * 600;
+        setTimeout(function() {
+          removeTyping();
+          addBotMsg(findResponse(question));
+        }, delay);
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        ask(input.value);
+      });
+
+      if (suggest) {
+        suggest.addEventListener('click', function(e) {
+          var btn = e.target.closest('.suggest-chip');
+          if (!btn) return;
+          ask(btn.dataset.q);
+        });
+      }
+    } catch (e) { console.error('AI chat error:', e); }
   })();
 </script>
 
