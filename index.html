@@ -1266,22 +1266,82 @@
   }
 
   .ai-suggest {
-    padding: 0 24px 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    padding: 16px 20px 16px;
     border-bottom: 1px solid var(--border);
   }
 
+  .ai-suggest-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+
   .ai-suggest-label {
-    width: 100%;
     font-size: 11px;
     font-weight: 600;
     color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 4px;
   }
+
+  .ai-suggest-count {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ai-cat-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    margin: 0 -20px 12px;
+    padding: 0 20px 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-cat-tabs::-webkit-scrollbar { display: none; }
+
+  .ai-cat-tab {
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .ai-cat-tab:hover {
+    color: var(--text);
+    border-color: var(--border-bright);
+  }
+
+  .ai-cat-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #06080F;
+  }
+
+  .ai-cat-tab .cnt {
+    opacity: 0.7;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  .ai-cat-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ai-cat-panel[hidden] { display: none; }
 
   .suggest-chip {
     padding: 8px 14px;
@@ -1291,6 +1351,7 @@
     font-size: 13px;
     color: var(--text);
     transition: all 0.15s ease;
+    text-align: left;
   }
 
   .suggest-chip:hover {
@@ -1967,26 +2028,62 @@
         </div>
 
         <div class="ai-body" id="aiBody">
-          <div class="msg msg-bot">Привет! Я AI-помощник RoboForex Partners. Отвечу на любые вопросы про заработок, комиссии и регистрацию.
+          <div class="msg msg-bot">Привет! Я AI-помощник RoboForex Partners. Отвечу на любые вопросы про заработок, копитрейдинг и надёжность брокера.
 
-Можешь задать вопрос сам или выбрать из подсказок ниже 👇</div>
+Выбери тему ниже и нажми любой вопрос — или напиши свой 👇</div>
         </div>
 
         <div class="ai-suggest" id="aiSuggest">
-          <div class="ai-suggest-label">Популярные вопросы</div>
-          <button class="suggest-chip" data-q="Сколько можно заработать?">💰 Сколько можно заработать?</button>
-          <button class="suggest-chip" data-q="Как начать с нуля?">🚀 Как начать с нуля?</button>
-          <button class="suggest-chip" data-q="Это бесплатно?">💳 Это бесплатно?</button>
-          <button class="suggest-chip" data-q="Нужны ли вложения?">💼 Нужны ли вложения?</button>
-          <button class="suggest-chip" data-q="Что такое 84%?">📊 Что такое 84%?</button>
-          <button class="suggest-chip" data-q="Когда выплаты?">📅 Когда выплаты?</button>
-          <button class="suggest-chip" data-q="Это надёжно?">🛡️ Это надёжно?</button>
-          <button class="suggest-chip" data-q="Где зарегистрирован RoboForex?">📜 Где зарегистрирован?</button>
-          <button class="suggest-chip" data-q="Что если брокер закроется?">⚠️ Если брокер закроется?</button>
-          <button class="suggest-chip" data-q="Как работают 5 уровней?">🌐 Как работают 5 уровней?</button>
-          <button class="suggest-chip" data-q="Как заработать пассивно без торговли?">💤 Пассивный доход без торговли</button>
-          <button class="suggest-chip" data-q="Что такое копитрейдинг CopyFX?">🔄 Копитрейдинг CopyFX?</button>
-          <button class="suggest-chip" data-q="Как подключить CopyFX клиенту?">💎 Как подключить CopyFX?</button>
+          <div class="ai-suggest-head">
+            <span class="ai-suggest-label">Выбери тему и вопрос</span>
+            <span class="ai-suggest-count">23 шаблона</span>
+          </div>
+
+          <div class="ai-cat-tabs" role="tablist">
+            <button class="ai-cat-tab active" data-cat="income">💰 Доход <span class="cnt">5</span></button>
+            <button class="ai-cat-tab" data-cat="start">🚀 Старт <span class="cnt">5</span></button>
+            <button class="ai-cat-tab" data-cat="copy">🔄 CopyFX <span class="cnt">5</span></button>
+            <button class="ai-cat-tab" data-cat="trust">🛡️ Надёжность <span class="cnt">5</span></button>
+            <button class="ai-cat-tab" data-cat="practice">📋 Практика <span class="cnt">3</span></button>
+          </div>
+
+          <div class="ai-cat-panel" data-cat="income">
+            <button class="suggest-chip" data-q="Сколько можно заработать партнёру?">Сколько можно заработать?</button>
+            <button class="suggest-chip" data-q="Что такое 84% комиссии?">Что такое 84% комиссии?</button>
+            <button class="suggest-chip" data-q="Как работают 5 уровней реферальной сети?">Как работают 5 уровней сети?</button>
+            <button class="suggest-chip" data-q="Когда платят выплаты?">Когда платят выплаты?</button>
+            <button class="suggest-chip" data-q="Сколько максимум зарабатывают топ-партнёры?">Сколько у топ-партнёров?</button>
+          </div>
+
+          <div class="ai-cat-panel" data-cat="start" hidden>
+            <button class="suggest-chip" data-q="Как начать с нуля без опыта?">Как начать с нуля?</button>
+            <button class="suggest-chip" data-q="Это бесплатно?">Это бесплатно?</button>
+            <button class="suggest-chip" data-q="Нужны ли свои вложения?">Нужны ли вложения?</button>
+            <button class="suggest-chip" data-q="А если у меня не получится?">А если не получится?</button>
+            <button class="suggest-chip" data-q="Сколько времени надо тратить в день?">Сколько времени надо?</button>
+          </div>
+
+          <div class="ai-cat-panel" data-cat="copy" hidden>
+            <button class="suggest-chip" data-q="Что такое копитрейдинг CopyFX?">Что такое CopyFX?</button>
+            <button class="suggest-chip" data-q="Как подключить CopyFX клиенту?">Как подключить CopyFX?</button>
+            <button class="suggest-chip" data-q="Как заработать пассивно без торговли?">Пассивный доход без торговли</button>
+            <button class="suggest-chip" data-q="Как стать инвестором-копировщиком?">Как стать инвестором?</button>
+            <button class="suggest-chip" data-q="Как стать трейдером-провайдером в CopyFX?">Как стать трейдером-провайдером?</button>
+          </div>
+
+          <div class="ai-cat-panel" data-cat="trust" hidden>
+            <button class="suggest-chip" data-q="RoboForex — это надёжно?">RoboForex надёжный?</button>
+            <button class="suggest-chip" data-q="Где зарегистрирован RoboForex?">Где зарегистрирован?</button>
+            <button class="suggest-chip" data-q="Что будет если брокер закроется?">Что если брокер закроется?</button>
+            <button class="suggest-chip" data-q="Где хранятся деньги клиентов?">Где хранятся деньги?</button>
+            <button class="suggest-chip" data-q="Какие награды у RoboForex?">Какие награды у брокера?</button>
+          </div>
+
+          <div class="ai-cat-panel" data-cat="practice" hidden>
+            <button class="suggest-chip" data-q="Где брать клиентов и трафик?">Где брать клиентов?</button>
+            <button class="suggest-chip" data-q="В каких странах работает RoboForex?">В каких странах работает?</button>
+            <button class="suggest-chip" data-q="Что за Telegram бот?">Что за Telegram бот?</button>
+          </div>
         </div>
 
         <form class="ai-input" id="aiForm">
@@ -2433,11 +2530,7 @@
         addUserMsg(question.trim());
         input.value = '';
 
-        // Hide suggestions after first question
-        if (suggest && !suggest.classList.contains('used')) {
-          suggest.classList.add('used');
-          suggest.style.display = 'none';
-        }
+        // Suggestions stay visible — visitor can ask follow-ups via templates
 
         var typing = showTyping();
         var delay = 500 + Math.random() * 600;
@@ -2452,7 +2545,22 @@
         ask(input.value);
       });
 
+      // Category tab switching
       if (suggest) {
+        var tabs = suggest.querySelectorAll('.ai-cat-tab');
+        var panels = suggest.querySelectorAll('.ai-cat-panel');
+        tabs.forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            var cat = tab.dataset.cat;
+            tabs.forEach(function(t) { t.classList.toggle('active', t === tab); });
+            panels.forEach(function(p) {
+              if (p.dataset.cat === cat) p.removeAttribute('hidden');
+              else p.setAttribute('hidden', '');
+            });
+          });
+        });
+
+        // Chip click — event delegation
         suggest.addEventListener('click', function(e) {
           var btn = e.target.closest('.suggest-chip');
           if (!btn) return;
