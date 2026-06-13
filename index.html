@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RoboForex AI — Зарабатывай до 84% комиссии брокера</title>
-<meta name="description" content="AI-агент ведёт клиента от первого вопроса до регистрации. Зарабатывай до 84% комиссии брокера в партнёрской программе RoboForex.">
+<title>RoboForex AI — Зарабатывай до 65% комиссии брокера</title>
+<meta name="description" content="AI-агент ведёт клиента от первого вопроса до регистрации. Зарабатывай до 65% комиссии брокера в партнёрской программе RoboForex.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -1521,6 +1521,440 @@
     font-weight: 600;
   }
 
+  /* === Partner Package === */
+  .pkg-section {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .pkg-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(at 20% 0%, var(--accent-glow) 0%, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .pkg-section > .container { position: relative; }
+
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) { .pkg-grid { grid-template-columns: 1fr; } }
+
+  .pkg-card {
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius);
+    padding: 32px;
+    position: relative;
+    transition: all 0.25s ease;
+    overflow: hidden;
+  }
+
+  .pkg-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+
+  .pkg-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+
+  .pkg-num {
+    position: absolute;
+    top: 24px; right: 24px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 48px;
+    color: var(--surface-hover);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pkg-icon {
+    font-size: 36px;
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+
+  .pkg-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .pkg-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .pkg-cta {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  /* === 5-level tree === */
+  .tree {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 8px;
+  }
+
+  .tree-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .tree-root::after {
+    content: '';
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 32px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .tree-you {
+    background: linear-gradient(135deg, var(--accent), #0EA5E9);
+    color: #06080F;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 17px;
+    box-shadow: 0 0 40px var(--accent-glow);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tree-levels {
+    display: grid;
+    gap: 14px;
+  }
+
+  .tree-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    transition: all 0.2s ease;
+  }
+
+  @media (max-width: 640px) {
+    .tree-row { grid-template-columns: 44px 1fr; padding: 14px 16px; }
+    .tree-row .tree-pct { grid-column: 1 / -1; text-align: right; margin-top: 4px; }
+  }
+
+  .tree-row:hover {
+    border-color: var(--border-bright);
+    transform: translateX(4px);
+  }
+
+  .tree-row.lvl1 { border-color: var(--accent); }
+
+  .tree-badge {
+    width: 44px; height: 44px;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tree-row.lvl1 .tree-badge {
+    background: var(--accent);
+    color: #06080F;
+    border-color: var(--accent);
+  }
+
+  .tree-info {
+    min-width: 0;
+  }
+
+  .tree-info-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .tree-info-desc {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+
+  .tree-pct {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .tree-row.lvl1 .tree-pct { color: var(--warm); font-size: 24px; }
+
+  .tree-note {
+    margin-top: 28px;
+    padding: 18px 22px;
+    background: rgba(34, 211, 238, 0.06);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: var(--radius-sm);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .tree-note-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .tree-note b { color: var(--accent); }
+
+  /* === FAQ === */
+  .faq {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .faq-item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--border-bright);
+  }
+
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: background 0.15s ease;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::marker { content: ''; }
+
+  .faq-item summary:hover {
+    background: var(--surface);
+  }
+
+  .faq-item .faq-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.2s ease;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--accent);
+    color: #06080F;
+    border-color: var(--accent);
+  }
+
+  .faq-item .faq-body {
+    padding: 0 24px 22px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === 10-min Checklist === */
+  .checklist {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+
+  .checklist-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .checklist-icon {
+    font-size: 32px;
+  }
+
+  .checklist-head h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .checklist-head span {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-weight: 600;
+  }
+
+  .checklist ol {
+    list-style: none;
+    counter-reset: cl;
+    padding: 0;
+    margin: 0;
+  }
+
+  .checklist li {
+    counter-increment: cl;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: start;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li::before {
+    content: counter(cl);
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: #06080F;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+  }
+
+  .checklist-step-title {
+    font-weight: 600;
+    font-size: 15.5px;
+    margin-bottom: 2px;
+  }
+
+  .checklist-step-time {
+    color: var(--text-dim);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .checklist-step-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* === Sticky bottom CTA === */
+  .sticky-cta {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 32px));
+    z-index: 200;
+    background: linear-gradient(135deg, var(--accent), #0EA5E9);
+    color: #06080F;
+    padding: 14px 20px 14px 22px;
+    border-radius: 999px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    max-width: calc(100vw - 32px);
+  }
+
+  .sticky-cta.show {
+    transform: translate(-50%, 0);
+  }
+
+  .sticky-cta:hover {
+    transform: translate(-50%, -2px);
+  }
+
+  .sticky-cta-close {
+    width: 24px; height: 24px;
+    background: rgba(6, 8, 15, 0.15);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #06080F;
+    border: none;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .sticky-cta-close:hover {
+    background: rgba(6, 8, 15, 0.3);
+  }
+
+  @media (max-width: 480px) {
+    .sticky-cta { font-size: 14px; padding: 12px 16px 12px 18px; gap: 8px; }
+  }
+
   /* === Final CTA === */
   .final-cta {
     text-align: center;
@@ -1605,7 +2039,7 @@
 <section class="hero">
   <div class="container hero-content">
     <span class="eyebrow"><span class="dot"></span>AI-агент · RoboForex Partners</span>
-    <h1>Зарабатывай до <span class="number-accent">84%</span> комиссии брокера</h1>
+    <h1>Зарабатывай до <span class="number-accent">65%</span> комиссии брокера</h1>
     <p class="hero-sub">AI-агент сам ведёт новичка от первого вопроса до регистрации. Твоя задача — делиться ссылкой.</p>
     <div class="hero-actions">
       <a href="#ai-chat" class="btn btn-primary btn-large">Спросить AI →</a>
@@ -1621,20 +2055,20 @@
           <span>Дмитрий В. — выплата <b>$1 280</b></span>
           <span>Сергей П. — 3 уровня сети активны</span>
           <span>Марина С. — выплата <b>$215</b></span>
-          <span>Олег Р. — апгрейд до Affiliate 84%</span>
+          <span>Олег Р. — апгрейд до уровня Affiliate</span>
           <span>Алексей М. — выплата <b>$342</b></span>
           <span>Ирина К. — новый клиент <b>+$50/мес</b></span>
           <span>Дмитрий В. — выплата <b>$1 280</b></span>
           <span>Сергей П. — 3 уровня сети активны</span>
           <span>Марина С. — выплата <b>$215</b></span>
-          <span>Олег Р. — апгрейд до Affiliate 84%</span>
+          <span>Олег Р. — апгрейд до уровня Affiliate</span>
         </div>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat">
-        <div class="stat-num" data-count="84" data-suffix="%">0%</div>
+        <div class="stat-num" data-count="65" data-suffix="%">0%</div>
         <div class="stat-label">Макс. комиссия</div>
       </div>
       <div class="stat">
@@ -1671,8 +2105,8 @@
       </div>
       <div class="why-card">
         <div class="why-icon">💰</div>
-        <h3>До 84% от спреда</h3>
-        <p>Партнёр получает до 84% от комиссии брокера с каждой сделки привлечённого клиента — пожизненно.</p>
+        <h3>До 65% от спреда</h3>
+        <p>Партнёр получает до 65% от комиссии брокера с каждой сделки привлечённого клиента — пожизненно.</p>
         <span class="why-tag">Высокий доход</span>
       </div>
       <div class="why-card">
@@ -1712,6 +2146,48 @@
   </div>
 </section>
 
+<!-- PARTNER PACKAGE -->
+<section class="pkg-section" id="package">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Партнёрский пакет</div>
+      <h2>Что ты получаешь после регистрации</h2>
+      <p>Не просто реферальная ссылка. Полноценная автоматизированная система приглашения — твой личный AI-чат-бот плюс готовая воронка для роста сети с первого дня.</p>
+    </div>
+
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-num">01</div>
+        <div class="pkg-icon">🤖</div>
+        <h3>Свой реферальный AI-чат-бот</h3>
+        <p>Персональная копия рабочего бота под твоей реферальной ссылкой. Работает в Telegram, общается с клиентами на русском, отвечает на вопросы, объясняет программу, готовит к регистрации.</p>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-num">02</div>
+        <div class="pkg-icon">🔄</div>
+        <h3>Автоматизированная воронка 24/7</h3>
+        <p>Клиент попадает к боту — бот сам ведёт его по 7 шагам, снимает возражения, доводит до регистрации. Ты получаешь готовый прогретый контакт и звонишь только когда человек уже почти партнёр.</p>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-num">03</div>
+        <div class="pkg-icon">🔗</div>
+        <h3>Реферальная ссылка с привязкой</h3>
+        <p>Пожизненная связка каждого клиента с тобой. Каждая его сделка приносит тебе комиссию — до 65% от спреда. Плюс автоматическое подключение 5-уровневой реферальной сети.</p>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-num">04</div>
+        <div class="pkg-icon">🎓</div>
+        <h3>Обучение и поддержка наставника</h3>
+        <p>Связь с наставником, который уже зарабатывает в этой системе. Готовые скрипты продаж, разбор кейсов, помощь с трафиком и подключением первых клиентов. Не остаёшься один.</p>
+      </div>
+    </div>
+
+    <div class="pkg-cta">
+      <a href="https://rbfxdirect.com/ru/lk/?a=rgtfy" class="btn btn-primary btn-large" target="_blank" rel="noopener">Забрать партнёрский пакет →</a>
+    </div>
+  </div>
+</section>
+
 <!-- CALCULATOR -->
 <section class="calc-section" id="calc">
   <div class="container">
@@ -1736,7 +2212,7 @@
         <div class="calc-input">
           <label for="commission">Твой % комиссии</label>
           <div class="value"><span id="commissionVal">50</span>%</div>
-          <input type="range" id="commission" min="10" max="84" value="50" step="1">
+          <input type="range" id="commission" min="10" max="65" value="50" step="1">
         </div>
       </div>
 
@@ -1798,7 +2274,7 @@
           <div class="tier-stats">
             <div class="tier-stat"><span>Клиентов</span><span>20</span></div>
             <div class="tier-stat"><span>Средний депозит</span><span>$500</span></div>
-            <div class="tier-stat"><span>% комиссии</span><span>70%</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>50%</span></div>
             <div class="tier-stat"><span>Уровни сети</span><span>2</span></div>
           </div>
           <div class="tier-yearly">
@@ -1809,34 +2285,34 @@
         <div class="tier" data-tier="pro">
           <div class="tier-tag">Уровень 3</div>
           <div class="tier-name">Профи</div>
-          <div class="tier-income">$1 750</div>
+          <div class="tier-income">$1 500</div>
           <div class="tier-income-label">в месяц</div>
           <div class="tier-divider"></div>
           <div class="tier-stats">
             <div class="tier-stat"><span>Клиентов</span><span>50</span></div>
             <div class="tier-stat"><span>Средний депозит</span><span>$1 000</span></div>
-            <div class="tier-stat"><span>% комиссии</span><span>70%</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>60%</span></div>
             <div class="tier-stat"><span>Уровни сети</span><span>3</span></div>
           </div>
           <div class="tier-yearly">
-            <span>За год</span><span>$21 000</span>
+            <span>За год</span><span>$18 000</span>
           </div>
         </div>
 
         <div class="tier" data-tier="top">
           <div class="tier-tag">Уровень 4</div>
           <div class="tier-name">Топ-партнёр</div>
-          <div class="tier-income">$8 400</div>
+          <div class="tier-income">$6 500</div>
           <div class="tier-income-label">в месяц</div>
           <div class="tier-divider"></div>
           <div class="tier-stats">
             <div class="tier-stat"><span>Клиентов</span><span>100</span></div>
             <div class="tier-stat"><span>Средний депозит</span><span>$2 000</span></div>
-            <div class="tier-stat"><span>% комиссии</span><span>84%</span></div>
+            <div class="tier-stat"><span>% комиссии</span><span>65%</span></div>
             <div class="tier-stat"><span>Уровни сети</span><span>5</span></div>
           </div>
           <div class="tier-yearly">
-            <span>За год</span><span>$100 800</span>
+            <span>За год</span><span>$78 000</span>
           </div>
         </div>
 
@@ -1886,8 +2362,8 @@
         <div class="copyfx-feat">
           <span class="copyfx-feat-icon">💎</span>
           <div>
-            <h3>Та же ставка — до 84%</h3>
-            <p>Доход с CopyFX-клиентов считается по той же шкале. Affiliate-партнёры получают до 84% от комиссии брокера. Просто комиссии становится больше.</p>
+            <h3>Та же ставка — до 65%</h3>
+            <p>Доход с CopyFX-клиентов считается по той же шкале. Affiliate-партнёры получают до 65% от комиссии брокера. Просто комиссии становится больше.</p>
           </div>
         </div>
       </div>
@@ -1966,7 +2442,7 @@
         </div>
         <div class="passive-stat partner">
           <div class="passive-stat-label">Тебе как партнёру</div>
-          <div class="passive-stat-value">до 84% с торговых комиссий</div>
+          <div class="passive-stat-value">до 65% с торговых комиссий</div>
         </div>
       </div>
 
@@ -1980,7 +2456,7 @@
         </div>
         <div class="passive-stat partner">
           <div class="passive-stat-label">Тебе как партнёру</div>
-          <div class="passive-stat-value">до 84% + комиссии с копий</div>
+          <div class="passive-stat-value">до 65% + комиссии с копий</div>
         </div>
       </div>
 
@@ -2012,9 +2488,9 @@
 <section class="ai-section" id="ai-chat">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">AI-помощник</div>
-      <h2>Задай вопрос про заработок</h2>
-      <p>AI отвечает на все типичные вопросы про партнёрку, комиссии и старт. Для сложных кейсов — переход к главному агенту в Telegram.</p>
+      <div class="section-eyebrow">👤 AI для тебя — будущего партнёра</div>
+      <h2>Задай вопрос про заработок прямо сейчас</h2>
+      <p>Этот AI отвечает <b>тебе</b> — человеку, который читает лендинг и думает о партнёрстве. Для <b>твоих будущих клиентов</b> будет работать другой бот: тот самый, который ты получишь в партнёрском пакете и который проведёт их к регистрации.</p>
     </div>
 
     <div class="ai-wrap">
@@ -2036,12 +2512,12 @@
         <div class="ai-suggest" id="aiSuggest">
           <div class="ai-suggest-head">
             <span class="ai-suggest-label">Выбери тему и вопрос</span>
-            <span class="ai-suggest-count">23 шаблона</span>
+            <span class="ai-suggest-count">24 шаблона</span>
           </div>
 
           <div class="ai-cat-tabs" role="tablist">
             <button class="ai-cat-tab active" data-cat="income">💰 Доход <span class="cnt">5</span></button>
-            <button class="ai-cat-tab" data-cat="start">🚀 Старт <span class="cnt">5</span></button>
+            <button class="ai-cat-tab" data-cat="start">🚀 Старт <span class="cnt">6</span></button>
             <button class="ai-cat-tab" data-cat="copy">🔄 CopyFX <span class="cnt">5</span></button>
             <button class="ai-cat-tab" data-cat="trust">🛡️ Надёжность <span class="cnt">5</span></button>
             <button class="ai-cat-tab" data-cat="practice">📋 Практика <span class="cnt">3</span></button>
@@ -2049,13 +2525,14 @@
 
           <div class="ai-cat-panel" data-cat="income">
             <button class="suggest-chip" data-q="Сколько можно заработать партнёру?">Сколько можно заработать?</button>
-            <button class="suggest-chip" data-q="Что такое 84% комиссии?">Что такое 84% комиссии?</button>
+            <button class="suggest-chip" data-q="Что такое 65% комиссии?">Что такое 65% комиссии?</button>
             <button class="suggest-chip" data-q="Как работают 5 уровней реферальной сети?">Как работают 5 уровней сети?</button>
             <button class="suggest-chip" data-q="Когда платят выплаты?">Когда платят выплаты?</button>
             <button class="suggest-chip" data-q="Сколько максимум зарабатывают топ-партнёры?">Сколько у топ-партнёров?</button>
           </div>
 
           <div class="ai-cat-panel" data-cat="start" hidden>
+            <button class="suggest-chip" data-q="Что я получу как партнёр? Что входит в пакет?">Что входит в пакет?</button>
             <button class="suggest-chip" data-q="Как начать с нуля без опыта?">Как начать с нуля?</button>
             <button class="suggest-chip" data-q="Это бесплатно?">Это бесплатно?</button>
             <button class="suggest-chip" data-q="Нужны ли свои вложения?">Нужны ли вложения?</button>
@@ -2107,8 +2584,8 @@
     <div class="community-grid">
       <div class="com-card">
         <div class="com-card-icon">🤖</div>
-        <h3>AI Партнёрский Агент</h3>
-        <p>Полноценный AI с памятью диалога. Помогает новичкам разобраться с партнёрской программой шаг за шагом.</p>
+        <h3>🎯 AI-бот для ТВОИХ клиентов</h3>
+        <p>Это и есть твой будущий «партнёрский пакет в действии» — полноценный AI с памятью диалога, который ты подключишь к своей реферальной ссылке. Можешь сейчас написать ему сам, чтобы протестировать, как он будет работать с твоими клиентами.</p>
         <ul>
           <li>Отвечает на любые вопросы о RoboForex</li>
           <li>Помогает с регистрацией и первыми шагами</li>
@@ -2120,7 +2597,7 @@
 
       <div class="com-card">
         <div class="com-card-icon">💬</div>
-        <h3>Партнёрский чат</h3>
+        <h3>💬 Чат для ТЕБЯ — партнёра</h3>
         <p>Живое сообщество партнёров RoboForex. Делись опытом, задавай вопросы, получай поддержку от тех, кто уже зарабатывает.</p>
         <ul>
           <li>Реальные кейсы и стратегии партнёров</li>
@@ -2143,42 +2620,189 @@
       <p>Главный доход — с прямых клиентов. Уровни 2–5 работают сами и приносят пассивный доход с сети.</p>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Уровень</th>
-            <th>Кто это</th>
-            <th>% от комиссии</th>
-            <th>Пример</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Уровень 1</td><td>Твои прямые клиенты</td><td><span class="accent">до 84%</span> (Affiliate)</td><td>$840 с $1000 комиссии</td></tr>
-          <tr><td>Уровень 2</td><td>Клиенты твоих партнёров</td><td>до 20% от уровня 1</td><td>авто, без участия</td></tr>
-          <tr><td>Уровень 3</td><td>Следующий уровень сети</td><td>до 10% от уровня 1</td><td>авто, без участия</td></tr>
-          <tr><td>Уровни 4–5</td><td>Глубина сети</td><td>до 5% от уровня 1</td><td>авто, без участия</td></tr>
-        </tbody>
-      </table>
+    <div class="tree">
+      <div class="tree-root">
+        <div class="tree-you">👤 ТЫ — партнёр</div>
+      </div>
+
+      <div class="tree-levels">
+        <div class="tree-row lvl1">
+          <div class="tree-badge">1</div>
+          <div class="tree-info">
+            <div class="tree-info-title">Твои прямые клиенты</div>
+            <div class="tree-info-desc">Те, кого ты привёл сам через бота или ссылку. Основной поток дохода.</div>
+          </div>
+          <div class="tree-pct">до 65%</div>
+        </div>
+
+        <div class="tree-row">
+          <div class="tree-badge">2</div>
+          <div class="tree-info">
+            <div class="tree-info-title">Клиенты твоих партнёров</div>
+            <div class="tree-info-desc">Кого приводят те, кого привёл ты. Работает само, без твоего участия.</div>
+          </div>
+          <div class="tree-pct">+20%</div>
+        </div>
+
+        <div class="tree-row">
+          <div class="tree-badge">3</div>
+          <div class="tree-info">
+            <div class="tree-info-title">3-й уровень сети</div>
+            <div class="tree-info-desc">Клиенты партнёров твоих партнёров. Чистый пассив.</div>
+          </div>
+          <div class="tree-pct">+10%</div>
+        </div>
+
+        <div class="tree-row">
+          <div class="tree-badge">4</div>
+          <div class="tree-info">
+            <div class="tree-info-title">4-й уровень сети</div>
+            <div class="tree-info-desc">Глубина сети. Когда сеть большая — это превращается в серьёзный поток.</div>
+          </div>
+          <div class="tree-pct">+5%</div>
+        </div>
+
+        <div class="tree-row">
+          <div class="tree-badge">5</div>
+          <div class="tree-info">
+            <div class="tree-info-title">5-й уровень сети</div>
+            <div class="tree-info-desc">Самая глубина. Платят все 17 лет, пока клиенты в самом низу торгуют.</div>
+          </div>
+          <div class="tree-pct">+5%</div>
+        </div>
+      </div>
+
+      <div class="tree-note">
+        <div class="tree-note-icon">💡</div>
+        <div>
+          <b>Важно:</b> ты не теряешь свой доход с уровня 1, когда твой партнёр приводит клиента. Это <b>дополнительные</b> проценты сверху — RoboForex выплачивает их из своей доли, а не из твоей. Поэтому делиться сетью выгодно.
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">FAQ</div>
+      <h2>Частые возражения</h2>
+      <p>Самые распространённые сомнения новичков — с честными ответами.</p>
+    </div>
+
+    <div class="faq">
+      <details class="faq-item">
+        <summary>
+          <span>А если у меня мало подписчиков — это вообще для меня?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Аудитория важна, но не критична. AI-бот в Telegram умеет конвертить даже маленькие потоки: его задача — прогревать каждого, кто пришёл, до регистрации. 200 целевых подписчиков, дающих 2-3 регистрации в месяц, через год могут давать $300-500/мес пассива через сеть. Главное — стартовать.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Это не пирамида? Не схема развода?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Нет. Партнёрская программа RoboForex — это affiliate-маркетинг: брокер делится с тобой комиссией, которую он берёт с реальных торговых операций клиентов. Никаких взносов, никаких «купи позицию», никаких выплат «за приведённых партнёров». Платят только тогда, когда клиент реально торгует. Это публичная программа лицензированного брокера, работающая с 2009 года.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Сколько времени надо в день?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Активная фаза — 30-60 минут в день: запостить контент с ссылкой, ответить на вопросы в комментариях, посмотреть статистику в личном кабинете. AI-бот при этом работает 24/7 — он сам общается с клиентами, отвечает ночью, обрабатывает входящих, пока ты на основной работе или спишь. Это и есть смысл автоматизации.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Сколько ждать до первой выплаты?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Первая комиссия начисляется в день, когда привлечённый клиент совершает первую сделку. Выплаты идут 2 раза в месяц на любые способы (банк, крипта, кошельки) от $10. Если приведёшь активного трейдера в течение первой недели — первую выплату получишь через 7-14 дней.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>А если бот меня подведёт или ответит что-то не то?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Бот работает на проверенной модели Groq AI, обучен только на материалах RoboForex. Все сценарии диалога отшлифованы. У наставника есть админ-доступ к логам — если где-то AI ошибётся, исправление прилетает всем партнёрам централизованно. Плюс на критических точках (регистрация, выплата) бот всегда передаёт человеку.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Я ничего не понимаю в трейдинге — это страшно?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Хорошая новость: тебе не нужно разбираться в трейдинге. Ты не торгуешь, не инвестируешь, не даёшь финансовых советов. Ты партнёр — твоё дело привести человека к боту. Дальше всё объясняет AI, а финальную поддержку даёт наставник. По сути, это маркетинг-задача, а не финансовая.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + CHECKLIST -->
 <section class="final-cta">
   <div class="container">
     <div class="section-eyebrow">Начни сегодня</div>
-    <h2>Готов стать партнёром?</h2>
-    <p>Регистрация бесплатная. AI-агент начнёт работать сразу после настройки. Первые комиссии — уже в первую неделю.</p>
+    <h2>Старт за 10 минут</h2>
+    <p>Не нужно ничего изучать. Четыре шага — и ты в системе с работающим AI-агентом.</p>
+
+    <div class="checklist">
+      <div class="checklist-head">
+        <span class="checklist-icon">⏱️</span>
+        <h3>Чек-лист быстрого старта</h3>
+        <span>~10 мин</span>
+      </div>
+      <ol>
+        <li>
+          <div>
+            <div class="checklist-step-time">2 минуты</div>
+            <div class="checklist-step-title">Регистрация по партнёрской ссылке</div>
+            <div class="checklist-step-desc">Email, пароль, страна. Без верификаций и фото паспорта на старте — нужны только при первой выплате.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="checklist-step-time">3 минуты</div>
+            <div class="checklist-step-title">Получение партнёрской ссылки и AI-бота</div>
+            <div class="checklist-step-desc">В личном кабинете → раздел «Партнёрам». Копируешь ссылку, добавляешь себя в Telegram-бот наставника — он подключает твою копию AI-агента.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="checklist-step-time">3 минуты</div>
+            <div class="checklist-step-title">Первая публикация со ссылкой</div>
+            <div class="checklist-step-desc">Один пост в Telegram, Instagram, VK, Twitter — где у тебя есть аудитория. Готовый текст и баннер даёт наставник.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="checklist-step-time">2 минуты</div>
+            <div class="checklist-step-title">Готово — AI-бот принимает клиентов</div>
+            <div class="checklist-step-desc">Дальше воронка работает сама. Получаешь уведомления в Telegram, когда клиент зарегистрировался. Первая комиссия — после его первой сделки.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
     <div class="final-actions">
       <a href="https://rbfxdirect.com/ru/lk/?a=rgtfy" class="btn btn-primary btn-large" target="_blank" rel="noopener">Зарегистрироваться →</a>
-      <a href="https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5" class="btn btn-secondary btn-large" target="_blank" rel="noopener">🤖 Написать боту</a>
+      <a href="https://t.me/GlobalSharkTopBot?start=4aa681da-f147-4229-888e-27fb4e9a58a5" class="btn btn-secondary btn-large" target="_blank" rel="noopener">🤖 Написать наставнику</a>
     </div>
-    <div class="final-note">Бесплатно · Без обязательств · Лицензированный брокер FSC</div>
+    <div class="final-note">Бесплатно · Без обязательств · Лицензированный брокер FSC Belize №9759600</div>
   </div>
 </section>
 
 </main>
+
+<!-- Sticky CTA -->
+<a href="https://rbfxdirect.com/ru/lk/?a=rgtfy" class="sticky-cta" id="stickyCta" target="_blank" rel="noopener" hidden>
+  <span>👉 Забрать AI-агента</span>
+  <button type="button" class="sticky-cta-close" id="stickyCtaClose" aria-label="Закрыть">✕</button>
+</a>
 
 <footer>
   <div class="container foot">
@@ -2351,6 +2975,10 @@
       // Knowledge base. Each entry: triggers (regex), response (string with optional {tg} placeholder).
       var KB = [
         {
+          triggers: /(что получ|что дают|что входит|пакет|свой бот|свой ai|своя система|инструмент|материал)/i,
+          response: 'Партнёр получает рабочую инфраструктуру под ключ:\n\n🤖 Свой реферальный AI-чат-бот — копия рабочего бота под твоей ссылкой, работает в Telegram, общается с клиентами автоматически.\n\n🔄 Автоматизированная воронка 24/7 — бот ведёт каждого клиента по 7 шагам до регистрации, ты подключаешься только в конце.\n\n🔗 Партнёрская ссылка — пожизненная привязка клиента к тебе, комиссия до 65% с каждой его сделки.\n\n🎓 Обучение от наставника — готовые скрипты, разбор кейсов, помощь с трафиком, доступ к партнёрскому чату.\n\nНе нужно ничего настраивать самому. Все компоненты подключает наставник в течение дня после регистрации.'
+        },
+        {
           triggers: /(пассив|без работы|не торгу|ничего не дела|сам.*зарабат|не разбира.*трейдинг)/i,
           response: 'Пассивный доход в CopyFX — это центральная фишка. Есть 3 варианта:\n\n👤 Инвестор-копировщик — выбирает топ-трейдера и копирует его сделки автоматически. Доход: $200–$2 000/мес с депозита. Делать ничего не нужно.\n\n📊 Трейдер-провайдер — публикует стратегию в рейтинге. Получает % от прибыли каждого копировщика. Один раз торгует — копируется сотнями. $500–$5 000/мес.\n\n🤝 Партнёр-привлекатель — AI-агент сам приводит клиентов. Ты только делишься ссылкой. $300–$8 400/мес с активных клиентов.\n\nОдин человек может совмещать все 3 роли.'
         },
@@ -2364,7 +2992,7 @@
         },
         {
           triggers: /(копитрейд|copy|копиров|copyfx|трейдер.провайд|стратеги.*копиров|инвестор.*копир)/i,
-          response: 'Копитрейдинг (CopyFX) — твой второй источник дохода. Клиенты подписываются на сделки топ-трейдеров RoboForex и копируют их автоматически.\n\nЧто это даёт партнёру:\n• CopyFX-клиент совершает 80–150 сделок в месяц вместо 15–30\n• Trader-провайдеры создают огромный объём сами\n• Та же шкала комиссий — до 84%\n• Никаких доп. усилий — это встроенная фича\n\nТипичный CopyFX-клиент приносит партнёру $80–150/мес против $15–30 с обычного. В 3–5 раз больше.'
+          response: 'Копитрейдинг (CopyFX) — твой второй источник дохода. Клиенты подписываются на сделки топ-трейдеров RoboForex и копируют их автоматически.\n\nЧто это даёт партнёру:\n• CopyFX-клиент совершает 80–150 сделок в месяц вместо 15–30\n• Trader-провайдеры создают огромный объём сами\n• Та же шкала комиссий — до 65%\n• Никаких доп. усилий — это встроенная фича\n\nТипичный CopyFX-клиент приносит партнёру $80–150/мес против $15–30 с обычного. В 3–5 раз больше.'
         },
         {
           triggers: /(как.*копи|подключ.*copy|как.*начать.*copy|где copyfx|copyfx.*работа)/i,
@@ -2372,7 +3000,7 @@
         },
         {
           triggers: /(сколько|зараб|доход|выруч|получ|деньг.*месяц|приб)/i,
-          response: 'Доход складывается из трёх вещей: сколько клиентов приведёшь, какие у них депозиты и твой % комиссии (до 84%).\n\nПримеры:\n• 10 клиентов × $500 × 50% = ~$125/мес\n• 30 клиентов × $1000 × 70% = ~$1 050/мес\n• 50 клиентов × $1500 × 84% = ~$3 150/мес\n\n💎 С CopyFX-клиентами (копитрейдинг) доход выше в 3–5 раз — они торгуют постоянно.\n\nКалькулятор выше посчитает твою цифру по своим вводным.'
+          response: 'Доход складывается из трёх вещей: сколько клиентов приведёшь, какие у них депозиты и твой % комиссии (до 65%).\n\nПримеры:\n• 10 клиентов × $500 × 50% = ~$125/мес\n• 30 клиентов × $1000 × 60% = ~$900/мес\n• 50 клиентов × $1500 × 65% = ~$2 437/мес\n\n💎 С CopyFX-клиентами (копитрейдинг) доход выше в 3–5 раз — они торгуют постоянно.\n\nКалькулятор выше посчитает твою цифру по своим вводным.'
         },
         {
           triggers: /(как нач|с чего нач|новичок|первый шаг|первые шаги|с нуля)/i,
@@ -2388,11 +3016,11 @@
         },
         {
           triggers: /(84|комисси|процент|спред|affiliate)/i,
-          response: '84% — это твоя доля от комиссии брокера на счёте типа Affiliate. Когда твой клиент совершает сделку и брокер берёт комиссию, ты получаешь до 84% от этой суммы.\n\nЭто работает пожизненно — пока клиент торгует, ты получаешь свою долю с каждой его сделки.'
+          response: '65% — это твоя доля от комиссии брокера на счёте типа Affiliate. Когда твой клиент совершает сделку и брокер берёт комиссию, ты получаешь до 65% от этой суммы.\n\nЭто работает пожизненно — пока клиент торгует, ты получаешь свою долю с каждой его сделки.'
         },
         {
           triggers: /(уровн|сеть|реферал|пирамид)/i,
-          response: '5 уровней реферальной сети:\n\n• Уровень 1 (твои прямые клиенты) — до 84%\n• Уровень 2 — до 20% от уровня 1\n• Уровень 3 — до 10%\n• Уровни 4-5 — до 5%\n\nТо есть когда твой партнёр приводит своих клиентов — ты тоже получаешь долю. Это и есть пассивный доход.'
+          response: '5 уровней реферальной сети:\n\n• Уровень 1 (твои прямые клиенты) — до 65%\n• Уровень 2 — до 20% от уровня 1\n• Уровень 3 — до 10%\n• Уровни 4-5 — до 5%\n\nТо есть когда твой партнёр приводит своих клиентов — ты тоже получаешь долю. Это и есть пассивный доход.'
         },
         {
           triggers: /(выпла|когда плат|вывод|payout|payday)/i,
@@ -2432,7 +3060,7 @@
         },
         {
           triggers: /(топ-партн|максимум|потолок|лимит|самые большие)/i,
-          response: 'Потолка нет. Топ-партнёры RoboForex зарабатывают $5 000 – $50 000 в месяц и больше.\n\nФормула роста проста: больше клиентов × больше уровней сети × Affiliate-счёт 84%.\n\nПример: 100 активных клиентов × $2 000 депозит × 84% = ~$8 400/мес (+ доход с сети).'
+          response: 'Потолка по сети нет. Топ-партнёры RoboForex с большой реферальной сетью зарабатывают $5 000 – $50 000 в месяц и больше.\n\nФормула роста проста: больше клиентов × больше уровней сети × Affiliate-счёт 65%.\n\nПример: 100 активных клиентов × $2 000 депозит × 65% = ~$6 500/мес (+ доход с сети до 5 уровней).'
         },
         {
           triggers: /(где брать|откуда брать|трафик|клиент.*найти|привлеч|маркет|реклам)/i,
@@ -2568,6 +3196,51 @@
         });
       }
     } catch (e) { console.error('AI chat error:', e); }
+  })();
+
+  /* ===== Sticky CTA — appears after scrolling past hero ===== */
+  (function () {
+    try {
+      var sticky = document.getElementById('stickyCta');
+      var close = document.getElementById('stickyCtaClose');
+      if (!sticky) return;
+
+      var dismissed = false;
+
+      if (close) {
+        close.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dismissed = true;
+          sticky.classList.remove('show');
+          setTimeout(function () { sticky.setAttribute('hidden', ''); }, 300);
+        });
+      }
+
+      var threshold = window.innerHeight * 0.8;
+      function onScroll() {
+        if (dismissed) return;
+        if (window.scrollY > threshold) {
+          if (sticky.hasAttribute('hidden')) sticky.removeAttribute('hidden');
+          sticky.classList.add('show');
+        } else {
+          sticky.classList.remove('show');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    } catch (e) { console.error('Sticky CTA error:', e); }
+  })();
+
+  /* ===== Preventive: explicit type="button" on every non-submit button ===== */
+  /* Prevents accidental form submission and page jumps when buttons live near forms */
+  (function () {
+    try {
+      var buttons = document.querySelectorAll('button:not([type])');
+      buttons.forEach(function (b) {
+        b.setAttribute('type', 'button');
+      });
+    } catch (e) { console.error('Button-type fix error:', e); }
   })();
 </script>
 
